@@ -3,225 +3,1499 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Full Body Program Takip</title>
+    <title>💪 Fitness Tracker Pro</title>
 <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #89f7fe, #66a6ff);
-    margin: 0;
-    padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
     color: #333;
-}
-h1 {
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
     text-align: center;
-    color: #fff;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
     margin-bottom: 10px;
-}
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-label,p {
-    display:block;
-}
-select,button {
-    display:block;
-    margin:10px auto;
-    padding:10px 15px;
-    border-radius:12px;
-    border:none;
-    font-size:16px;
-    cursor:pointer;
-}
-.program-card {
-    background-color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+        }
+
+        .controls {
+            padding: 30px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .select-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .select-wrapper {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+            color: #495057;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .program-section {
+            padding: 30px 20px;
+        }
+
+        .program-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .program-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .program-title::before {
+            content: '🔥';
+            font-size: 1.5rem;
+        }
+
+        .progress-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .progress-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .progress-container {
+            background: #e9ecef;
     border-radius: 20px;
+            overflow: hidden;
+            height: 25px;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1, #667eea);
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .exercise-list {
+            list-style: none;
+            display: grid;
+            gap: 15px;
+        }
+
+        .exercise-item {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
     padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .exercise-item.completed {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-color: #28a745;
+            transform: scale(1.02);
+        }
+
+        .exercise-item.completed::before {
+            content: '✅';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .exercise-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .exercise-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-checkbox:checked {
+            background: #667eea;
+        }
+
+        .exercise-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .exercise-details {
+            flex: 1;
+        }
+
+        .exercise-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+
+        .exercise-rest {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .completed .exercise-name {
+            text-decoration: line-through;
+            color: #28a745;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Mobil uyumluluk */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .select-group {
+                flex-direction: column;
+            }
+
+            .select-wrapper {
+                min-width: auto;
+            }
+
+            .program-title {
+                font-size: 1.5rem;
+            }
+
+            .exercise-item {
+                padding: 15px;
+            }
+
+            .exercise-content {
+                gap: 10px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .controls, .program-section {
+                padding: 20px 15px;
+            }
+
+            .exercise-name {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animasyonlar */
+        .exercise-item {
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .exercise-item:nth-child(1) { animation-delay: 0.1s; }
+        .exercise-item:nth-child(2) { animation-delay: 0.2s; }
+        .exercise-item:nth-child(3) { animation-delay: 0.3s; }
+        .exercise-item:nth-child(4) { animation-delay: 0.4s; }
+        .exercise-item:nth-child(5) { animation-delay: 0.5s; }
+        .exercise-item:nth-child(6) { animation-delay: 0.6s; }
+        .exercise-item:nth-child(7) { animation-delay: 0.7s; }
+
+        /* Dinlenme Timer Modal */
+        .timer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .timer-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .timer-content {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .timer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #495057;
     margin-bottom: 20px;
-    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
-}
-.program-card:hover {
-    transform: translateY(-5px);
-}
-h2 {
-    text-align:center;
-    color:#34495e;
-    margin-bottom:20px;
-}
-ul {list-style:none; padding:0;}
-li {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:12px 15px;
-    margin-bottom:10px;
-    background:#f1f5f9;
-    border-radius:10px;
-    transition:all 0.3s;
-}
-li.completed {
-    background:#d4edda;
-    text-decoration:line-through;
-    color:#155724;
-}
-li:hover {background:#e2e8f0;}
-input[type="checkbox"] {width:20px;height:20px;}
-.rest-time {font-size:14px;color:#555;margin-left:10px;}
-.progress-container {background:#e0e0e0;border-radius:20px;overflow:hidden;margin:10px 0 20px 0;}
-.progress-bar {height:20px;background:linear-gradient(90deg,#76c7c0,#34a0a4);width:0%;transition:width 0.5s;}
-.toggle-chart {background:#34a0a4;color:#fff;margin-top:10px;}
-#chart {margin-top:20px; display:none;}
-.bar {height:20px;background:#ff6b6b;margin:5px 0;border-radius:10px;color:#fff;text-align:right;padding-right:5px;line-height:20px;}
+        }
+
+        .timer-display {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #667eea;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer-progress {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .timer-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1, #667eea);
+            width: 100%;
+            transition: width 1s linear;
+            border-radius: 10px;
+        }
+
+        .timer-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .timer-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timer-btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .timer-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .timer-btn-secondary {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .timer-btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .timer-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6c757d;
+            transition: color 0.3s ease;
+        }
+
+        .timer-close:hover {
+            color: #ff6b6b;
+        }
+
+        .notification-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+            z-index: 1001;
+            display: none;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification-badge.show {
+            display: block;
+        }
+
+        /* Egzersiz Detay Modal */
+        .exercise-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .exercise-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .exercise-content-modal {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        .exercise-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6c757d;
+            transition: color 0.3s ease;
+        }
+
+        .exercise-modal-close:hover {
+            color: #ff6b6b;
+        }
+
+        .exercise-modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 20px;
+            padding-right: 40px;
+        }
+
+        .exercise-modal-subtitle {
+            font-size: 1.1rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .exercise-modal-description {
+            font-size: 1rem;
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .exercise-modal-steps {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .exercise-modal-steps h4 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .exercise-modal-steps ol {
+            padding-left: 20px;
+            color: #495057;
+        }
+
+        .exercise-modal-steps li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .exercise-modal-tips {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .exercise-modal-tips h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .exercise-modal-tips ul {
+            padding-left: 20px;
+            color: #1976d2;
+        }
+
+        .exercise-modal-tips li {
+            margin-bottom: 5px;
+        }
+
+        .exercise-modal-muscles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .muscle-tag {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Mobil uyumluluk için timer modal */
+        @media (max-width: 768px) {
+            .timer-content {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .timer-display {
+                font-size: 3rem;
+            }
+
+            .timer-buttons {
+                flex-direction: column;
+            }
+
+            .timer-btn {
+                width: 100%;
+            }
+
+            .exercise-content-modal {
+                padding: 20px;
+                margin: 15px;
+            }
+
+            .exercise-modal-title {
+                font-size: 1.5rem;
+            }
+        }
 </style>
 </head>
 <body>
 <div class="container">
-<h1>🏋️ Full Body Program Takip</h1>
+        <div class="header">
+            <h1>💪 Fitness Tracker Pro</h1>
+            <p>Hedeflerinize odaklanın, sonuçları görün!</p>
+        </div>
 
-<label for="presetSelect">Haftalık Preset Seç:</label>
+        <div class="controls">
+            <div class="select-group">
+                <div class="select-wrapper">
+                    <label for="presetSelect">Program Düzeni</label>
 <select id="presetSelect">
-<option value="ABA">ABA</option>
-<option value="BAB">BAB</option>
+                        <option value="ABA">ABA Düzeni</option>
+                        <option value="BAB">BAB Düzeni</option>
 </select>
-
-<label for="daySelect">Gün Seç:</label>
+                </div>
+                <div class="select-wrapper">
+                    <label for="daySelect">Antrenman Günü</label>
 <select id="daySelect"></select>
+                </div>
+            </div>
+        </div>
 
-<div class="program-card">
-<h2 id="programTitle"></h2>
-<ul id="programList"></ul>
+        <div class="program-section">
+            <div class="program-header">
+                <h2 class="program-title" id="programTitle">Program A</h2>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-text" id="progressText">İlerleme: 0/7 egzersiz tamamlandı</div>
 <div class="progress-container">
     <div class="progress-bar" id="progressBar"></div>
 </div>
-<button onclick="resetDay()">✅ Bu Günü Sıfırla</button>
-<button class="toggle-chart" onclick="toggleChart()">📊 Haftalık İstatistik</button>
-<div id="chart"></div>
+            </div>
+
+            <ul class="exercise-list" id="programList"></ul>
+
+                    <div class="action-buttons">
+            <button class="btn btn-primary" onclick="resetDay()">
+                🔄 Bu Günü Sıfırla
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Dinlenme Timer Modal -->
+<div class="timer-modal" id="timerModal">
+    <div class="timer-content">
+        <button class="timer-close" onclick="closeTimer()">×</button>
+        <h2 class="timer-title">⏰ Dinlenme Süresi</h2>
+        <div class="timer-display" id="timerDisplay">00:00</div>
+        <div class="timer-progress">
+            <div class="timer-progress-bar" id="timerProgressBar"></div>
+        </div>
+        <div class="timer-buttons">
+            <button class="timer-btn timer-btn-secondary" onclick="closeTimer()">İptal</button>
+        </div>
+    </div>
+</div>
+
+<!-- Bildirim Badge -->
+<div class="notification-badge" id="notificationBadge">
+    <div>⏰ Dinlenme süresi bitti!</div>
+</div>
+
+<!-- Egzersiz Detay Modal -->
+<div class="exercise-modal" id="exerciseModal">
+    <div class="exercise-content-modal">
+        <button class="exercise-modal-close" onclick="closeExerciseModal()">×</button>
+        <h2 class="exercise-modal-title" id="exerciseModalTitle">Egzersiz Adı</h2>
+        <div class="exercise-modal-subtitle" id="exerciseModalSubtitle">Egzersiz Türü</div>
+        
+        <div class="exercise-modal-muscles" id="exerciseModalMuscles">
+            <!-- Kas grupları buraya gelecek -->
+        </div>
+        
+        <div class="exercise-modal-description" id="exerciseModalDescription">
+            <!-- Egzersiz açıklaması buraya gelecek -->
+        </div>
+        
+        <div class="exercise-modal-steps">
+            <h4>📋 Nasıl Yapılır:</h4>
+            <ol id="exerciseModalSteps">
+                <!-- Adımlar buraya gelecek -->
+            </ol>
+        </div>
+        
+        <div class="exercise-modal-tips">
+            <h4>💡 Önemli İpuçları:</h4>
+            <ul id="exerciseModalTips">
+                <!-- İpuçları buraya gelecek -->
+            </ul>
+        </div>
 </div>
 </div>
 
 <script>
 const programs = {
-"A":[
-{name:"Leg Press – 4x10-12", rest:"Dinlenme: 90 sn"},
-{name:"Bench Press – 4x8-10", rest:"Dinlenme: 90 sn"},
-{name:"Barbell Row – 4x8-10", rest:"Dinlenme: 90 sn"},
-{name:"Overhead Press – 3x10-12", rest:"Dinlenme: 60-75 sn"},
-{name:"Barbell Curl – 3x10-12", rest:"Dinlenme: 45-60 sn"},
-{name:"Triceps Pushdown – 3x10-12", rest:"Dinlenme: 45-60 sn"},
-{name:"Ab Crunch – 3x12-15", rest:"Dinlenme: 30-45 sn"}
-],
-"B":[
-{name:"Deadlift – 4x6-8", rest:"Dinlenme: 90-120 sn"},
-{name:"Incline Dumbbell Press – 4x8-10", rest:"Dinlenme: 90 sn"},
-{name:"Lat Pulldown / Pull-up – 4x8-10", rest:"Dinlenme: 90 sn"},
-{name:"Lateral Raises – 3x12-15", rest:"Dinlenme: 45-60 sn"},
-{name:"Hammer Curl – 3x10-12", rest:"Dinlenme: 45-60 sn"},
-{name:"Overhead Dumbbell Extension – 3x10-12", rest:"Dinlenme: 45-60 sn"},
-{name:"Knee Raises – 3x12-15", rest:"Dinlenme: 45-60 sn"}
-]
-};
+            "A": [
+                { 
+                    name: "Leg Press – 4x10-12", 
+                    rest: "Dinlenme: 90 sn",
+                    type: "Bacak Egzersizi",
+                    muscles: ["Quadriceps", "Glutes", "Hamstrings"],
+                    description: "Leg Press, bacak kaslarını güçlendirmek için kullanılan temel bir egzersizdir. Makine üzerinde yapılır ve güvenli bir şekilde ağır yüklerle çalışmanızı sağlar.",
+                    steps: [
+                        "Makineye oturun ve ayaklarınızı platforma yerleştirin",
+                        "Ayaklarınızı omuz genişliğinde açın",
+                        "Güvenlik kollarını kaldırın",
+                        "Nefes alarak platformu aşağı doğru itin",
+                        "Bacaklarınızı tamamen düzeltmeden durun",
+                        "Kontrol ederek başlangıç pozisyonuna dönün"
+                    ],
+                    tips: [
+                        "Sırtınızı her zaman sandalyeye yaslayın",
+                        "Dizlerinizi ayak parmaklarınızla aynı yönde tutun",
+                        "Ağırlığı topuklarınızla itin, parmak uçlarınızla değil",
+                        "Hareketi kontrollü yapın, momentum kullanmayın"
+                    ]
+                },
+                { 
+                    name: "Bench Press – 4x8-10", 
+                    rest: "Dinlenme: 90 sn",
+                    type: "Göğüs Egzersizi",
+                    muscles: ["Pectoralis Major", "Triceps", "Anterior Deltoid"],
+                    description: "Bench Press, göğüs kaslarını geliştirmek için en etkili egzersizlerden biridir. Üst vücut gücünü artırır ve kas kütlesi kazanımı sağlar.",
+                    steps: [
+                        "Bench'e sırt üstü uzanın",
+                        "Ayaklarınızı yerde düz tutun",
+                        "Barı omuz genişliğinden biraz daha geniş tutun",
+                        "Barı göğsünüzün ortasına doğru indirin",
+                        "Nefes vererek barı yukarı itin",
+                        "Kollarınızı tamamen düzeltmeden durun"
+                    ],
+                    tips: [
+                        "Kürek kemiklerinizi birbirine yaklaştırın",
+                        "Kalçanızı bench'ten kaldırmayın",
+                        "Barı kontrollü indirin ve hızlı kaldırın",
+                        "Spotter kullanmayı unutmayın"
+                    ]
+                },
+                { 
+                    name: "Barbell Row – 4x8-10", 
+                    rest: "Dinlenme: 90 sn",
+                    type: "Sırt Egzersizi",
+                    muscles: ["Latissimus Dorsi", "Rhomboids", "Trapezius"],
+                    description: "Barbell Row, sırt kaslarını güçlendirmek ve geliştirmek için mükemmel bir egzersizdir. Postürünüzü iyileştirir ve üst vücut gücünü artırır.",
+                    steps: [
+                        "Ayaklarınızı omuz genişliğinde açın",
+                        "Hafifçe dizlerinizi bükün ve öne eğilin",
+                        "Barı alt bacaklarınızın önünde tutun",
+                        "Kürek kemiklerinizi sıkıştırarak barı göbeğinize doğru çekin",
+                        "Dirseklerinizi vücudunuza yakın tutun",
+                        "Kontrol ederek barı indirin"
+                    ],
+                    tips: [
+                        "Sırtınızı düz tutun, yuvarlamayın",
+                        "Ağırlığı kollarınızla değil, sırt kaslarınızla çekin",
+                        "Dirseklerinizi vücudunuza yakın tutun",
+                        "Hareketi omuzlarınızla değil, kürek kemiklerinizle yapın"
+                    ]
+                },
+                { 
+                    name: "Overhead Press – 3x10-12", 
+                    rest: "Dinlenme: 60-75 sn",
+                    type: "Omuz Egzersizi",
+                    muscles: ["Deltoids", "Triceps", "Trapezius"],
+                    description: "Overhead Press, omuz kaslarını güçlendirmek için temel bir egzersizdir. Üst vücut gücünü artırır ve omuz stabilitesini geliştirir.",
+                    steps: [
+                        "Barı omuz seviyesinde tutun",
+                        "Ayaklarınızı omuz genişliğinde açın",
+                        "Karın kaslarınızı sıkın",
+                        "Barı başınızın üzerine doğru itin",
+                        "Kollarınızı tamamen düzeltin",
+                        "Kontrol ederek barı indirin"
+                    ],
+                    tips: [
+                        "Sırtınızı düz tutun",
+                        "Barı başınızın önünde değil, üzerinde tutun",
+                        "Karın kaslarınızı sıkın",
+                        "Hareketi kontrollü yapın"
+                    ]
+                },
+                { 
+                    name: "Barbell Curl – 3x10-12", 
+                    rest: "Dinlenme: 45-60 sn",
+                    type: "Biceps Egzersizi",
+                    muscles: ["Biceps Brachii", "Brachialis", "Forearms"],
+                    description: "Barbell Curl, biceps kaslarını geliştirmek için klasik bir egzersizdir. Kol gücünü artırır ve kas tanımını geliştirir.",
+                    steps: [
+                        "Ayaklarınızı omuz genişliğinde açın",
+                        "Barı alt kavrayışla tutun",
+                        "Dirseklerinizi vücudunuza yakın tutun",
+                        "Barı omuzlarınıza doğru kaldırın",
+                        "Biceps kaslarınızı sıkın",
+                        "Kontrol ederek barı indirin"
+                    ],
+                    tips: [
+                        "Dirseklerinizi sabit tutun",
+                        "Sallanmayın, kontrollü hareket edin",
+                        "Biceps kaslarınızı sıkın",
+                        "Ağırlığı tamamen indirin"
+                    ]
+                },
+                { 
+                    name: "Triceps Pushdown – 3x10-12", 
+                    rest: "Dinlenme: 45-60 sn",
+                    type: "Triceps Egzersizi",
+                    muscles: ["Triceps Brachii", "Forearms"],
+                    description: "Triceps Pushdown, triceps kaslarını izole olarak çalıştırmak için mükemmel bir egzersizdir. Kol gücünü artırır ve kas tanımını geliştirir.",
+                    steps: [
+                        "Kabloyu üst seviyede tutun",
+                        "Ayaklarınızı omuz genişliğinde açın",
+                        "Dirseklerinizi vücudunuza yakın tutun",
+                        "Kabloyu aşağı doğru itin",
+                        "Kollarınızı tamamen düzeltin",
+                        "Kontrol ederek kabloyu yukarı çekin"
+                    ],
+                    tips: [
+                        "Dirseklerinizi sabit tutun",
+                        "Sadece ön kollarınızı hareket ettirin",
+                        "Triceps kaslarınızı sıkın",
+                        "Hareketi kontrollü yapın"
+                    ]
+                },
+                { 
+                    name: "Ab Crunch – 3x12-15", 
+                    rest: "Dinlenme: 30-45 sn",
+                    type: "Karın Egzersizi",
+                    muscles: ["Rectus Abdominis", "Obliques"],
+                    description: "Ab Crunch, karın kaslarını güçlendirmek için temel bir egzersizdir. Core gücünü artırır ve karın tanımını geliştirir.",
+                    steps: [
+                        "Sırt üstü yatın ve dizlerinizi bükün",
+                        "Ayaklarınızı yerde düz tutun",
+                        "Ellerinizi başınızın arkasına koyun",
+                        "Karın kaslarınızı sıkarak omuzlarınızı kaldırın",
+                        "Göğsünüzü dizlerinize doğru getirin",
+                        "Kontrol ederek başlangıç pozisyonuna dönün"
+                    ],
+                    tips: [
+                        "Boynunuzu zorlamayın",
+                        "Karın kaslarınızı sıkın",
+                        "Momentum kullanmayın",
+                        "Nefes alışverişini düzenli yapın"
+                    ]
+                }
+            ],
+            "B": [
+                { 
+                    name: "Deadlift – 4x6-8", 
+                    rest: "Dinlenme: 90-120 sn",
+                    type: "Bileşik Egzersiz",
+                    muscles: ["Erector Spinae", "Glutes", "Hamstrings", "Quadriceps"],
+                    description: "Deadlift, vücudun en güçlü egzersizlerinden biridir. Tüm vücut gücünü artırır, postürü iyileştirir ve kas kütlesi kazanımı sağlar.",
+                    steps: [
+                        "Barı ayaklarınızın ortasında tutun",
+                        "Ayaklarınızı omuz genişliğinde açın",
+                        "Dizlerinizi bükün ve kalçanızı geriye itin",
+                        "Barı alt kavrayışla tutun",
+                        "Göğsünüzü yukarı kaldırın ve sırtınızı düz tutun",
+                        "Barı bacaklarınız boyunca yukarı çekin"
+                    ],
+                    tips: [
+                        "Sırtınızı her zaman düz tutun",
+                        "Barı bacaklarınıza yakın tutun",
+                        "Kalçanızı ve dizlerinizi aynı anda açın",
+                        "Ağırlığı topuklarınızla itin"
+                    ]
+                },
+                { 
+                    name: "Incline Dumbbell Press – 4x8-10", 
+                    rest: "Dinlenme: 90 sn",
+                    type: "Göğüs Egzersizi",
+                    muscles: ["Upper Pectoralis", "Anterior Deltoid", "Triceps"],
+                    description: "Incline Dumbbell Press, üst göğüs kaslarını hedefleyen mükemmel bir egzersizdir. Göğüs kaslarının üst kısmını geliştirir.",
+                    steps: [
+                        "Incline bench'e 30-45 derece açıyla uzanın",
+                        "Dumbbell'ları göğüs seviyesinde tutun",
+                        "Avuç içlerinizi öne doğru çevirin",
+                        "Dumbbell'ları yukarı doğru itin",
+                        "Kollarınızı tamamen düzeltmeden durun",
+                        "Kontrol ederek dumbbell'ları indirin"
+                    ],
+                    tips: [
+                        "Kürek kemiklerinizi birbirine yaklaştırın",
+                        "Dumbbell'ları kontrollü indirin",
+                        "Kalçanızı bench'ten kaldırmayın",
+                        "Nefes alışverişini düzenli yapın"
+                    ]
+                },
+                { 
+                    name: "Lat Pulldown / Pull-up – 4x8-10", 
+                    rest: "Dinlenme: 90 sn",
+                    type: "Sırt Egzersizi",
+                    muscles: ["Latissimus Dorsi", "Biceps", "Rhomboids"],
+                    description: "Lat Pulldown, sırt kaslarını güçlendirmek için etkili bir egzersizdir. Geniş sırt kasları geliştirir ve üst vücut gücünü artırır.",
+                    steps: [
+                        "Barı üst kavrayışla tutun",
+                        "Ayaklarınızı sabitleyin",
+                        "Göğsünüzü yukarı kaldırın",
+                        "Barı göğsünüzün üst kısmına doğru çekin",
+                        "Kürek kemiklerinizi sıkıştırın",
+                        "Kontrol ederek barı yukarı bırakın"
+                    ],
+                    tips: [
+                        "Sallanmayın, kontrollü hareket edin",
+                        "Barı boynunuzun arkasına değil, göğsünüze çekin",
+                        "Kürek kemiklerinizi sıkıştırın",
+                        "Dirseklerinizi vücudunuza yakın tutun"
+                    ]
+                },
+                { 
+                    name: "Lateral Raises – 3x12-15", 
+                    rest: "Dinlenme: 45-60 sn",
+                    type: "Omuz Egzersizi",
+                    muscles: ["Lateral Deltoid", "Trapezius"],
+                    description: "Lateral Raises, omuz kaslarının yan kısmını izole olarak çalıştırmak için mükemmel bir egzersizdir. Omuz genişliğini artırır.",
+                    steps: [
+                        "Dumbbell'ları yanlarınızda tutun",
+                        "Ayaklarınızı omuz genişliğinde açın",
+                        "Dumbbell'ları yanlara doğru kaldırın",
+                        "Dirseklerinizi hafifçe bükün",
+                        "Omuz seviyesine kadar kaldırın",
+                        "Kontrol ederek dumbbell'ları indirin"
+                    ],
+                    tips: [
+                        "Ağırlığı çok ağır tutmayın",
+                        "Dirseklerinizi hafifçe bükün",
+                        "Sallanmayın, kontrollü hareket edin",
+                        "Omuz seviyesini geçmeyin"
+                    ]
+                },
+                { 
+                    name: "Hammer Curl – 3x10-12", 
+                    rest: "Dinlenme: 45-60 sn",
+                    type: "Biceps Egzersizi",
+                    muscles: ["Biceps Brachii", "Brachialis", "Forearms"],
+                    description: "Hammer Curl, biceps ve ön kol kaslarını birlikte çalıştıran etkili bir egzersizdir. Kol gücünü artırır ve kas tanımını geliştirir.",
+                    steps: [
+                        "Dumbbell'ları yanlarınızda tutun",
+                        "Avuç içlerinizi birbirine bakacak şekilde tutun",
+                        "Dirseklerinizi vücudunuza yakın tutun",
+                        "Dumbbell'ları omuzlarınıza doğru kaldırın",
+                        "Biceps kaslarınızı sıkın",
+                        "Kontrol ederek dumbbell'ları indirin"
+                    ],
+                    tips: [
+                        "Dirseklerinizi sabit tutun",
+                        "Sallanmayın, kontrollü hareket edin",
+                        "Biceps kaslarınızı sıkın",
+                        "Ağırlığı tamamen indirin"
+                    ]
+                },
+                { 
+                    name: "Overhead Dumbbell Extension – 3x10-12", 
+                    rest: "Dinlenme: 45-60 sn",
+                    type: "Triceps Egzersizi",
+                    muscles: ["Triceps Brachii", "Forearms"],
+                    description: "Overhead Dumbbell Extension, triceps kaslarını uzun pozisyonda çalıştırmak için mükemmel bir egzersizdir. Triceps gelişimini artırır.",
+                    steps: [
+                        "Dumbbell'ı başınızın üzerinde tutun",
+                        "Dirseklerinizi bükün",
+                        "Dumbbell'ı başınızın arkasına indirin",
+                        "Triceps kaslarınızı sıkarak dumbbell'ı yukarı itin",
+                        "Kollarınızı tamamen düzeltin",
+                        "Kontrol ederek dumbbell'ı indirin"
+                    ],
+                    tips: [
+                        "Dirseklerinizi sabit tutun",
+                        "Sadece ön kollarınızı hareket ettirin",
+                        "Triceps kaslarınızı sıkın",
+                        "Hareketi kontrollü yapın"
+                    ]
+                },
+                { 
+                    name: "Knee Raises – 3x12-15", 
+                    rest: "Dinlenme: 45-60 sn",
+                    type: "Karın Egzersizi",
+                    muscles: ["Rectus Abdominis", "Hip Flexors"],
+                    description: "Knee Raises, alt karın kaslarını hedefleyen etkili bir egzersizdir. Core gücünü artırır ve karın tanımını geliştirir.",
+                    steps: [
+                        "Pull-up bar'ına asılın",
+                        "Kollarınızı omuz genişliğinde açın",
+                        "Karın kaslarınızı sıkın",
+                        "Dizlerinizi göğsünüze doğru kaldırın",
+                        "Alt karın kaslarınızı sıkın",
+                        "Kontrol ederek bacaklarınızı indirin"
+                    ],
+                    tips: [
+                        "Sallanmayın, kontrollü hareket edin",
+                        "Karın kaslarınızı sıkın",
+                        "Momentum kullanmayın",
+                        "Nefes alışverişini düzenli yapın"
+                    ]
+                }
+            ]
+        };
 
-const activeDays=[1,3,5]; // Pazartesi Çarşamba Cuma
-const dayNames=["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
-const daySelect=document.getElementById("daySelect");
-const dayLabel=document.getElementById("dayLabel");
-const programTitle=document.getElementById("programTitle");
-const programList=document.getElementById("programList");
-const progressBar=document.getElementById("progressBar");
-const presetSelect=document.getElementById("presetSelect");
-const chartDiv=document.getElementById("chart");
+        const activeDays = [1, 3, 5]; // Pazartesi Çarşamba Cuma
+        const dayNames = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+        
+        const daySelect = document.getElementById("daySelect");
+        const programTitle = document.getElementById("programTitle");
+        const programList = document.getElementById("programList");
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const presetSelect = document.getElementById("presetSelect");
 
 // Gün seçim dropdown
-activeDays.forEach(day=>{
-    const opt=document.createElement("option");
-    opt.value=day; opt.text=dayNames[day];
+        activeDays.forEach(day => {
+            const opt = document.createElement("option");
+            opt.value = day;
+            opt.text = dayNames[day];
     daySelect.appendChild(opt);
 });
 
 // Preset ve gün kaydetme
-presetSelect.value=localStorage.getItem("preset")||"ABA";
-presetSelect.addEventListener("change",()=>{
-    localStorage.setItem("preset",presetSelect.value);
+        presetSelect.value = localStorage.getItem("preset") || "ABA";
+        presetSelect.addEventListener("change", () => {
+            localStorage.setItem("preset", presetSelect.value);
     showProgram(parseInt(daySelect.value));
 });
 
 // ABA-BAB mantığı
-function getProgramForDay(dayIndex){
-    const preset=localStorage.getItem("preset")||"ABA";
-    const pos=activeDays.indexOf(dayIndex);
-    if(preset==="ABA") return (pos%2===0)?"A":"B";
-    else return (pos%2===0)?"B":"A";
+        function getProgramForDay(dayIndex) {
+            const preset = localStorage.getItem("preset") || "ABA";
+            const pos = activeDays.indexOf(dayIndex);
+            if (preset === "ABA") return (pos % 2 === 0) ? "A" : "B";
+            else return (pos % 2 === 0) ? "B" : "A";
 }
 
 // Program gösterme
-function showProgram(dayIndex){
-    const programKey=getProgramForDay(dayIndex);
-    programTitle.innerText="🔥 Program "+programKey;
-    programList.innerHTML="";
-    const todayData=programs[programKey];
-    todayData.forEach((item,index)=>{
-        const li=document.createElement("li");
-        li.innerHTML=`<label><input type="checkbox" id="chk${index}"> ${item.name} <span class="rest-time">${item.rest}</span></label>`;
+        function showProgram(dayIndex) {
+            const programKey = getProgramForDay(dayIndex);
+            programTitle.innerText = `Program ${programKey}`;
+            programList.innerHTML = "";
+            
+            const todayData = programs[programKey];
+            todayData.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.className = "exercise-item";
+                
+                li.innerHTML = `
+                    <div class="exercise-content">
+                        <input type="checkbox" class="exercise-checkbox" id="chk${index}">
+                        <div class="exercise-details">
+                            <div class="exercise-name">${item.name}</div>
+                            <div class="exercise-rest">${item.rest}</div>
+                        </div>
+                    </div>
+                `;
+                
         programList.appendChild(li);
-        const chk=document.getElementById(`chk${index}`);
-        const saved=localStorage.getItem(`${dayIndex}_${programKey}_${index}`);
-        if(saved==="true"){chk.checked=true; li.classList.add('completed');}
-        chk.addEventListener("change",()=>{
-            if(chk.checked){li.classList.add("completed"); localStorage.setItem(`${dayIndex}_${programKey}_${index}`,"true");}
-            else{li.classList.remove("completed"); localStorage.setItem(`${dayIndex}_${programKey}_${index}`,"false");}
-            updateProgress(dayIndex,programKey);
+                
+                const chk = document.getElementById(`chk${index}`);
+                const saved = localStorage.getItem(`${dayIndex}_${programKey}_${index}`);
+                
+                if (saved === "true") {
+                    chk.checked = true;
+                    li.classList.add('completed');
+                }
+                
+                chk.addEventListener("change", () => {
+                    if (chk.checked) {
+                        li.classList.add("completed");
+                        localStorage.setItem(`${dayIndex}_${programKey}_${index}`, "true");
+                    } else {
+                        li.classList.remove("completed");
+                        localStorage.setItem(`${dayIndex}_${programKey}_${index}`, "false");
+                    }
+                    updateProgress(dayIndex, programKey);
         });
     });
-    updateProgress(dayIndex,programKey);
+            
+            updateProgress(dayIndex, programKey);
 }
 
 // İlerleme bar
-function updateProgress(dayIndex,programKey){
-    const todayData=programs[programKey];
-    let completed=0;
-    todayData.forEach((item,index)=>{
-        const chk=document.getElementById(`chk${index}`);
-        if(chk && chk.checked) completed++;
-    });
-    const percent=Math.round((completed/todayData.length)*100);
-    progressBar.style.width=percent+"%";
+        function updateProgress(dayIndex, programKey) {
+            const todayData = programs[programKey];
+            let completed = 0;
+            
+            todayData.forEach((item, index) => {
+                const chk = document.getElementById(`chk${index}`);
+                if (chk && chk.checked) completed++;
+            });
+            
+            const percent = Math.round((completed / todayData.length) * 100);
+            progressBar.style.width = percent + "%";
+            progressText.innerText = `İlerleme: ${completed}/${todayData.length} egzersiz tamamlandı`;
 }
 
 // Sıfırlama
-function resetDay(){
-    const dayIndex=parseInt(daySelect.value);
-    const programKey=getProgramForDay(dayIndex);
-    programs[programKey].forEach((item,index)=>{
-        const chk=document.getElementById(`chk${index}`);
-        if(chk){chk.checked=false; chk.closest('li').classList.remove('completed'); localStorage.setItem(`${dayIndex}_${programKey}_${index}`,"false");}
-    });
-    updateProgress(dayIndex,programKey);
+        function resetDay() {
+            const dayIndex = parseInt(daySelect.value);
+            const programKey = getProgramForDay(dayIndex);
+            
+            programs[programKey].forEach((item, index) => {
+                const chk = document.getElementById(`chk${index}`);
+                if (chk) {
+                    chk.checked = false;
+                    chk.closest('li').classList.remove('completed');
+                    localStorage.setItem(`${dayIndex}_${programKey}_${index}`, "false");
+                }
+            });
+            
+            updateProgress(dayIndex, programKey);
+        }
 
-function renderChart(){
-    chartDiv.innerHTML="";
-    activeDays.forEach(day=>{
-        const programKey=getProgramForDay(day);
-        const total=programs[programKey].length;
-        let done=0;
-        programs[programKey].forEach((item,index)=>{
-            const saved=localStorage.getItem(`${day}_${programKey}_${index}`);
-            if(saved==="true") done++;
-        });
-        const percent=Math.round((done/total)*100);
-        const bar=document.createElement("div");
-        bar.className="bar";
-        bar.style.width=percent+"%";
-        bar.innerText=dayNames[day]+": "+done+"/"+total;
-        chartDiv.appendChild(bar);
-    });
+        // Timer değişkenleri
+        let timerInterval;
+        let timerSeconds = 0;
+        let timerTotalSeconds = 0;
+        let isTimerRunning = false;
+        let isTimerPaused = false;
+
+        // Dinlenme süresini saniyeye çevir
+        function parseRestTime(restText) {
+            const match = restText.match(/(\d+)/);
+            return match ? parseInt(match[1]) : 60;
+        }
+
+        // Timer modal'ını göster
+        function showTimerModal(restSeconds) {
+            timerTotalSeconds = restSeconds;
+            timerSeconds = restSeconds;
+            isTimerRunning = false;
+            isTimerPaused = false;
+            
+            updateTimerDisplay();
+            updateTimerProgress();
+            
+            document.getElementById('timerModal').classList.add('active');
+            
+            // Timer'ı otomatik başlat
+            startTimer();
+        }
+
+        // Timer'ı başlat
+        function startTimer() {
+            if (isTimerRunning) return;
+            
+            isTimerRunning = true;
+            isTimerPaused = false;
+            
+            timerInterval = setInterval(() => {
+                if (timerSeconds > 0) {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                    updateTimerProgress();
+                } else {
+                    clearInterval(timerInterval);
+                    timerFinished();
+                }
+            }, 1000);
+        }
+
+        // Timer'ı kapat
+        function closeTimer() {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            isTimerPaused = false;
+            document.getElementById('timerModal').classList.remove('active');
+        }
+
+        // Timer bittiğinde
+        function timerFinished() {
+            // Vibrasyon bildirimi (mobil)
+            vibrateDevice();
+            
+            // Bildirim göster
+            showNotification();
+            
+            // Modal'ı kapat
+            setTimeout(() => {
+                closeTimer();
+            }, 2000);
+        }
+
+        // Vibrasyon bildirimi
+        function vibrateDevice() {
+            if ('vibrate' in navigator) {
+                // Kısa-kısa-kısa pattern
+                navigator.vibrate([200, 100, 200, 100, 200]);
+            }
+        }
+
+        // Timer display'ini güncelle
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Timer progress bar'ını güncelle
+        function updateTimerProgress() {
+            const progress = (timerSeconds / timerTotalSeconds) * 100;
+            document.getElementById('timerProgressBar').style.width = `${progress}%`;
+        }
+
+
+
+        // Bildirim göster
+        function showNotification() {
+            const badge = document.getElementById('notificationBadge');
+            badge.classList.add('show');
+            
+            setTimeout(() => {
+                badge.classList.remove('show');
+            }, 5000);
+        }
+
+        // Egzersiz detay modal'ını göster
+        function showExerciseModal(exerciseData) {
+            document.getElementById('exerciseModalTitle').textContent = exerciseData.name;
+            document.getElementById('exerciseModalSubtitle').textContent = exerciseData.type;
+            document.getElementById('exerciseModalDescription').textContent = exerciseData.description;
+            
+            // Kas gruplarını göster
+            const musclesContainer = document.getElementById('exerciseModalMuscles');
+            musclesContainer.innerHTML = '';
+            exerciseData.muscles.forEach(muscle => {
+                const muscleTag = document.createElement('span');
+                muscleTag.className = 'muscle-tag';
+                muscleTag.textContent = muscle;
+                musclesContainer.appendChild(muscleTag);
+            });
+            
+            // Adımları göster
+            const stepsContainer = document.getElementById('exerciseModalSteps');
+            stepsContainer.innerHTML = '';
+            exerciseData.steps.forEach(step => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                stepsContainer.appendChild(li);
+            });
+            
+            // İpuçlarını göster
+            const tipsContainer = document.getElementById('exerciseModalTips');
+            tipsContainer.innerHTML = '';
+            exerciseData.tips.forEach(tip => {
+                const li = document.createElement('li');
+                li.textContent = tip;
+                tipsContainer.appendChild(li);
+            });
+            
+            document.getElementById('exerciseModal').classList.add('active');
+        }
+
+        // Egzersiz detay modal'ını kapat
+        function closeExerciseModal() {
+            document.getElementById('exerciseModal').classList.remove('active');
+        }
+
+        // Long press detection
+        let pressTimer;
+        let isLongPress = false;
+
+        // Checkbox change event'ini güncelle
+        function updateCheckboxEvent(chk, li, dayIndex, programKey, index, restText, exerciseData) {
+            // Long press için touch events
+            let startTime;
+            
+            li.addEventListener('touchstart', (e) => {
+                startTime = Date.now();
+                pressTimer = setTimeout(() => {
+                    isLongPress = true;
+                    showExerciseModal(exerciseData);
+                }, 500); // 500ms = 0.5 saniye
+            });
+            
+            li.addEventListener('touchend', () => {
+                clearTimeout(pressTimer);
+                if (isLongPress) {
+                    isLongPress = false;
+                    e.preventDefault();
+                }
+            });
+            
+            li.addEventListener('touchmove', () => {
+                clearTimeout(pressTimer);
+            });
+
+            // Mouse events için
+            li.addEventListener('mousedown', () => {
+                startTime = Date.now();
+                pressTimer = setTimeout(() => {
+                    isLongPress = true;
+                    showExerciseModal(exerciseData);
+                }, 500);
+            });
+            
+            li.addEventListener('mouseup', () => {
+                clearTimeout(pressTimer);
+                isLongPress = false;
+            });
+            
+            li.addEventListener('mouseleave', () => {
+                clearTimeout(pressTimer);
+                isLongPress = false;
+            });
+
+            chk.addEventListener("change", () => {
+                if (chk.checked) {
+                    li.classList.add("completed");
+                    localStorage.setItem(`${dayIndex}_${programKey}_${index}`, "true");
+                    
+                    // Dinlenme süresi varsa timer başlat
+                    const restSeconds = parseRestTime(restText);
+                    if (restSeconds > 0) {
+                        showTimerModal(restSeconds);
+                    }
+                } else {
+                    li.classList.remove("completed");
+                    localStorage.setItem(`${dayIndex}_${programKey}_${index}`, "false");
+                }
+                updateProgress(dayIndex, programKey);
+            });
+        }
+
+        // Program gösterme fonksiyonunu güncelle
+        function showProgram(dayIndex) {
+            const programKey = getProgramForDay(dayIndex);
+            programTitle.innerText = `Program ${programKey}`;
+            programList.innerHTML = "";
+            
+            const todayData = programs[programKey];
+            todayData.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.className = "exercise-item";
+                
+                li.innerHTML = `
+                    <div class="exercise-content">
+                        <input type="checkbox" class="exercise-checkbox" id="chk${index}">
+                        <div class="exercise-details">
+                            <div class="exercise-name">${item.name}</div>
+                            <div class="exercise-rest">${item.rest}</div>
+                        </div>
+                    </div>
+                `;
+                
+                programList.appendChild(li);
+                
+                const chk = document.getElementById(`chk${index}`);
+                const saved = localStorage.getItem(`${dayIndex}_${programKey}_${index}`);
+                
+                if (saved === "true") {
+                    chk.checked = true;
+                    li.classList.add('completed');
+                }
+                
+                // Yeni event listener'ı kullan
+                updateCheckboxEvent(chk, li, dayIndex, programKey, index, item.rest, item);
+            });
+            
+            updateProgress(dayIndex, programKey);
 }
 
 // Başlangıç
-daySelect.value=activeDays[0];
+        daySelect.value = activeDays[0];
 showProgram(parseInt(daySelect.value));
-daySelect.addEventListener("change",()=>{showProgram(parseInt(daySelect.value));});
+        daySelect.addEventListener("change", () => {
+            showProgram(parseInt(daySelect.value));
+        });
 </script>
 </body>
 </html>
