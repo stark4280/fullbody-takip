@@ -198,13 +198,6 @@ function resetDay(){
         if(chk){chk.checked=false; chk.closest('li').classList.remove('completed'); localStorage.setItem(`${dayIndex}_${programKey}_${index}`,"false");}
     });
     updateProgress(dayIndex,programKey);
-}
-
-// Haftalık istatistik
-function toggleChart(){
-    chartDiv.style.display=(chartDiv.style.display==="none")?"block":"none";
-    renderChart();
-}
 
 function renderChart(){
     chartDiv.innerHTML="";
