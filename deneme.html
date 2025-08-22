@@ -22,21 +22,17 @@ h1 {
     max-width: 800px;
     margin: 0 auto;
 }
-.day-label {
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #fff;
+label,p {
+    display:block;
 }
-select {
-    display: block;
-    margin: 10px auto 20px auto;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: none;
-    font-size: 16px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+select,button {
+    display:block;
+    margin:10px auto;
+    padding:10px 15px;
+    border-radius:12px;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
 }
 .program-card {
     background-color: #fff;
@@ -50,212 +46,189 @@ select {
     transform: translateY(-5px);
 }
 h2 {
-    text-align: center;
-    color: #34495e;
-    margin-bottom: 20px;
+    text-align:center;
+    color:#34495e;
+    margin-bottom:20px;
 }
-ul {
-    list-style: none;
-    padding: 0;
-}
+ul {list-style:none; padding:0;}
 li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 15px;
-    margin-bottom: 10px;
-    background: #f1f5f9;
-    border-radius: 10px;
-    transition: all 0.3s;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 15px;
+    margin-bottom:10px;
+    background:#f1f5f9;
+    border-radius:10px;
+    transition:all 0.3s;
 }
 li.completed {
-    background: #d4edda;
-    text-decoration: line-through;
-    color: #155724;
+    background:#d4edda;
+    text-decoration:line-through;
+    color:#155724;
 }
-li:hover {
-    background: #e2e8f0;
-}
-label {
-    flex: 1;
-    cursor: pointer;
-}
-input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-}
-.rest-time {
-    font-size: 14px;
-    color: #555;
-    margin-left: 10px;
-}
-.progress-container {
-    background: #e0e0e0;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 10px 0 20px 0;
-}
-.progress-bar {
-    height: 20px;
-    background: linear-gradient(90deg, #76c7c0, #34a0a4);
-    width: 0%;
-    transition: width 0.5s;
-}
-button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 25px;
-    background: #ff6b6b;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-button:hover {
-    background: #e63946;
-}
+li:hover {background:#e2e8f0;}
+input[type="checkbox"] {width:20px;height:20px;}
+.rest-time {font-size:14px;color:#555;margin-left:10px;}
+.progress-container {background:#e0e0e0;border-radius:20px;overflow:hidden;margin:10px 0 20px 0;}
+.progress-bar {height:20px;background:linear-gradient(90deg,#76c7c0,#34a0a4);width:0%;transition:width 0.5s;}
+.toggle-chart {background:#34a0a4;color:#fff;margin-top:10px;}
+#chart {margin-top:20px; display:none;}
+.bar {height:20px;background:#ff6b6b;margin:5px 0;border-radius:10px;color:#fff;text-align:right;padding-right:5px;line-height:20px;}
 </style>
 </head>
 <body>
 <div class="container">
 <h1>🏋️ Full Body Program Takip</h1>
-<div class="day-label" id="dayLabel"></div>
 
+<label for="presetSelect">Haftalık Preset Seç:</label>
+<select id="presetSelect">
+<option value="ABA">ABA</option>
+<option value="BAB">BAB</option>
+</select>
+
+<label for="daySelect">Gün Seç:</label>
 <select id="daySelect"></select>
 
 <div class="program-card">
-    <h2 id="programTitle"></h2>
-    <ul id="programList"></ul>
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    <button onclick="resetDay()">✅ Bu Günü Sıfırla</button>
+<h2 id="programTitle"></h2>
+<ul id="programList"></ul>
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+<button onclick="resetDay()">✅ Bu Günü Sıfırla</button>
+<button class="toggle-chart" onclick="toggleChart()">📊 Haftalık İstatistik</button>
+<div id="chart"></div>
 </div>
 </div>
 
 <script>
 const programs = {
-    "A":[
-        {name:"Leg Press – 4x10-12", rest:"Dinlenme: 90 sn"},
-        {name:"Bench Press – 4x8-10", rest:"Dinlenme: 90 sn"},
-        {name:"Barbell Row – 4x8-10", rest:"Dinlenme: 90 sn"},
-        {name:"Overhead Press – 3x10-12", rest:"Dinlenme: 60-75 sn"},
-        {name:"Barbell Curl – 3x10-12", rest:"Dinlenme: 45-60 sn"},
-        {name:"Triceps Pushdown – 3x10-12", rest:"Dinlenme: 45-60 sn"},
-        {name:"Ab Crunch – 3x12-15", rest:"Dinlenme: 30-45 sn"}
-    ],
-    "B":[
-        {name:"Deadlift – 4x6-8", rest:"Dinlenme: 90-120 sn"},
-        {name:"Incline Dumbbell Press – 4x8-10", rest:"Dinlenme: 90 sn"},
-        {name:"Lat Pulldown / Pull-up – 4x8-10", rest:"Dinlenme: 90 sn"},
-        {name:"Lateral Raises – 3x12-15", rest:"Dinlenme: 45-60 sn"},
-        {name:"Hammer Curl – 3x10-12", rest:"Dinlenme: 45-60 sn"},
-        {name:"Overhead Dumbbell Extension – 3x10-12", rest:"Dinlenme: 45-60 sn"},
-        {name:"Knee Raises – 3x12-15", rest:"Dinlenme: 45-60 sn"}
-    ]
+"A":[
+{name:"Leg Press – 4x10-12", rest:"Dinlenme: 90 sn"},
+{name:"Bench Press – 4x8-10", rest:"Dinlenme: 90 sn"},
+{name:"Barbell Row – 4x8-10", rest:"Dinlenme: 90 sn"},
+{name:"Overhead Press – 3x10-12", rest:"Dinlenme: 60-75 sn"},
+{name:"Barbell Curl – 3x10-12", rest:"Dinlenme: 45-60 sn"},
+{name:"Triceps Pushdown – 3x10-12", rest:"Dinlenme: 45-60 sn"},
+{name:"Ab Crunch – 3x12-15", rest:"Dinlenme: 30-45 sn"}
+],
+"B":[
+{name:"Deadlift – 4x6-8", rest:"Dinlenme: 90-120 sn"},
+{name:"Incline Dumbbell Press – 4x8-10", rest:"Dinlenme: 90 sn"},
+{name:"Lat Pulldown / Pull-up – 4x8-10", rest:"Dinlenme: 90 sn"},
+{name:"Lateral Raises – 3x12-15", rest:"Dinlenme: 45-60 sn"},
+{name:"Hammer Curl – 3x10-12", rest:"Dinlenme: 45-60 sn"},
+{name:"Overhead Dumbbell Extension – 3x10-12", rest:"Dinlenme: 45-60 sn"},
+{name:"Knee Raises – 3x12-15", rest:"Dinlenme: 45-60 sn"}
+]
 };
 
-// Aktif günler ve ABA-BAB dönüşümü
-const activeDays = [1,3,5]; // Pazartesi, Çarşamba, Cuma
-const dayNames = ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
-const daySelect = document.getElementById("daySelect");
-const dayLabel = document.getElementById("dayLabel");
-const programTitle = document.getElementById("programTitle");
-const programList = document.getElementById("programList");
-const progressBar = document.getElementById("progressBar");
-
-// Hafta numarası
-function getWeekNumber(d){
-    const onejan = new Date(d.getFullYear(),0,1);
-    return Math.ceil((((d - onejan) / 86400000) + onejan.getDay()+1)/7);
-}
+const activeDays=[1,3,5]; // Pazartesi Çarşamba Cuma
+const dayNames=["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
+const daySelect=document.getElementById("daySelect");
+const dayLabel=document.getElementById("dayLabel");
+const programTitle=document.getElementById("programTitle");
+const programList=document.getElementById("programList");
+const progressBar=document.getElementById("progressBar");
+const presetSelect=document.getElementById("presetSelect");
+const chartDiv=document.getElementById("chart");
 
 // Gün seçim dropdown
 activeDays.forEach(day=>{
-    const opt = document.createElement("option");
-    opt.value = day;
-    opt.text = dayNames[day];
+    const opt=document.createElement("option");
+    opt.value=day; opt.text=dayNames[day];
     daySelect.appendChild(opt);
 });
 
-// Program gösterme
-function showProgram(dayIndex){
-    const weekNum = getWeekNumber(new Date());
-    let programKey;
-    // ABA-BAB mantığı: hafta tek mi çift mi
-    if(weekNum % 2 === 1){
-        programKey = (activeDays.indexOf(dayIndex) % 2 === 0) ? "A":"B";
-    } else {
-        programKey = (activeDays.indexOf(dayIndex) % 2 === 0) ? "B":"A";
-    }
+// Preset ve gün kaydetme
+presetSelect.value=localStorage.getItem("preset")||"ABA";
+presetSelect.addEventListener("change",()=>{
+    localStorage.setItem("preset",presetSelect.value);
+    showProgram(parseInt(daySelect.value));
+});
 
-    programTitle.innerText = "🔥 Program " + programKey;
-    programList.innerHTML = "";
-    const todayData = programs[programKey];
-
-    todayData.forEach((item,index)=>{
-        const li = document.createElement("li");
-        li.innerHTML = `<label><input type="checkbox" id="chk${index}"> ${item.name} <span class="rest-time">${item.rest}</span></label>`;
-        programList.appendChild(li);
-
-        const chk = document.getElementById(`chk${index}`);
-        const saved = localStorage.getItem(`${dayIndex}_${programKey}_${index}`);
-        if(saved==="true"){chk.checked=true; li.classList.add('completed');}
-
-        chk.addEventListener('change',()=>{
-            if(chk.checked){
-                li.classList.add('completed');
-                localStorage.setItem(`${dayIndex}_${programKey}_${index}`,"true");
-            } else{
-                li.classList.remove('completed');
-                localStorage.setItem(`${dayIndex}_${programKey}_${index}`,"false");
-            }
-            updateProgress(dayIndex, programKey);
-        });
-    });
-
-    updateProgress(dayIndex, programKey);
-    dayLabel.innerText = "Seçili Gün: " + dayNames[dayIndex];
+// ABA-BAB mantığı
+function getProgramForDay(dayIndex){
+    const preset=localStorage.getItem("preset")||"ABA";
+    const pos=activeDays.indexOf(dayIndex);
+    if(preset==="ABA") return (pos%2===0)?"A":"B";
+    else return (pos%2===0)?"B":"A";
 }
 
-// İlerleme barı
-function updateProgress(dayIndex, programKey){
-    const todayData = programs[programKey];
-    let completed = 0;
+// Program gösterme
+function showProgram(dayIndex){
+    const programKey=getProgramForDay(dayIndex);
+    programTitle.innerText="🔥 Program "+programKey;
+    programList.innerHTML="";
+    const todayData=programs[programKey];
     todayData.forEach((item,index)=>{
-        const chk = document.getElementById(`chk${index}`);
+        const li=document.createElement("li");
+        li.innerHTML=`<label><input type="checkbox" id="chk${index}"> ${item.name} <span class="rest-time">${item.rest}</span></label>`;
+        programList.appendChild(li);
+        const chk=document.getElementById(`chk${index}`);
+        const saved=localStorage.getItem(`${dayIndex}_${programKey}_${index}`);
+        if(saved==="true"){chk.checked=true; li.classList.add('completed');}
+        chk.addEventListener("change",()=>{
+            if(chk.checked){li.classList.add("completed"); localStorage.setItem(`${dayIndex}_${programKey}_${index}`,"true");}
+            else{li.classList.remove("completed"); localStorage.setItem(`${dayIndex}_${programKey}_${index}`,"false");}
+            updateProgress(dayIndex,programKey);
+        });
+    });
+    updateProgress(dayIndex,programKey);
+}
+
+// İlerleme bar
+function updateProgress(dayIndex,programKey){
+    const todayData=programs[programKey];
+    let completed=0;
+    todayData.forEach((item,index)=>{
+        const chk=document.getElementById(`chk${index}`);
         if(chk && chk.checked) completed++;
     });
-    const percent = Math.round((completed/todayData.length)*100);
-    progressBar.style.width = percent + "%";
+    const percent=Math.round((completed/todayData.length)*100);
+    progressBar.style.width=percent+"%";
 }
 
 // Sıfırlama
 function resetDay(){
-    const dayIndex = parseInt(daySelect.value);
-    const weekNum = getWeekNumber(new Date());
-    let programKey = (weekNum %2===1) ? ((activeDays.indexOf(dayIndex)%2===0)?"A":"B") : ((activeDays.indexOf(dayIndex)%2===0)?"B":"A");
-    const todayData = programs[programKey];
-    todayData.forEach((item,index)=>{
-        const chk = document.getElementById(`chk${index}`);
+    const dayIndex=parseInt(daySelect.value);
+    const programKey=getProgramForDay(dayIndex);
+    programs[programKey].forEach((item,index)=>{
+        const chk=document.getElementById(`chk${index}`);
         if(chk){chk.checked=false; chk.closest('li').classList.remove('completed'); localStorage.setItem(`${dayIndex}_${programKey}_${index}`,"false");}
     });
-    updateProgress(dayIndex, programKey);
+    updateProgress(dayIndex,programKey);
+}
+
+// Haftalık istatistik
+function toggleChart(){
+    chartDiv.style.display=(chartDiv.style.display==="none")?"block":"none";
+    renderChart();
+}
+
+function renderChart(){
+    chartDiv.innerHTML="";
+    activeDays.forEach(day=>{
+        const programKey=getProgramForDay(day);
+        const total=programs[programKey].length;
+        let done=0;
+        programs[programKey].forEach((item,index)=>{
+            const saved=localStorage.getItem(`${day}_${programKey}_${index}`);
+            if(saved==="true") done++;
+        });
+        const percent=Math.round((done/total)*100);
+        const bar=document.createElement("div");
+        bar.className="bar";
+        bar.style.width=percent+"%";
+        bar.innerText=dayNames[day]+": "+done+"/"+total;
+        chartDiv.appendChild(bar);
+    });
 }
 
 // Başlangıç
-const todayIndex = new Date().getDay();
-daySelect.value = activeDays.includes(todayIndex)?todayIndex:activeDays[0];
+daySelect.value=activeDays[0];
 showProgram(parseInt(daySelect.value));
-
-// Gün seçimi
-daySelect.addEventListener('change', ()=>{
-    showProgram(parseInt(daySelect.value));
-});
+daySelect.addEventListener("change",()=>{showProgram(parseInt(daySelect.value));});
 </script>
-
 </body>
 </html>
