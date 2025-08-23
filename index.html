@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💪 Fitness Tracker Pro</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSL4YEKTP0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CSL4YEKTP0');
+    </script>
 <style>
         * {
             margin: 0;
@@ -221,16 +231,16 @@ body {
 
         .exercise-sets {
             display: flex;
-            gap: 8px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-top: 15px;
             flex-wrap: wrap;
         }
 
         .set-checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #667eea;
-            border-radius: 4px;
+            width: 32px;
+            height: 32px;
+            border: 3px solid #667eea;
+            border-radius: 8px;
             cursor: pointer;
             position: relative;
             background: white;
@@ -238,14 +248,20 @@ body {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 16px;
             font-weight: bold;
             color: #667eea;
+        }
+
+        .set-checkbox:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
 
         .set-checkbox:checked {
             background: #667eea;
             color: white;
+            transform: scale(1.05);
         }
 
         .set-checkbox:checked::after {
@@ -256,14 +272,15 @@ body {
             transform: translate(-50%, -50%);
             color: white;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 18px;
         }
 
         .set-label {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: #6c757d;
-            margin-top: 5px;
+            margin-top: 8px;
             text-align: center;
+            font-weight: 600;
         }
 
         .exercise-details {
