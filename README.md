@@ -2,43 +2,39 @@
 
 **Arkadaşlarla birlikte antrenman yapın ve fitness hedeflerinize ulaşın!**
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?style=for-the-badge)](https://yourusername.github.io/siteantrenman/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
-[![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red.svg?style=for-the-badge)](https://github.com/yourusername/siteantrenman)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?style=for-the-badge)](https://stark4280.github.io/siteantrenman/)
+[![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red.svg?style=for-the-badge)](https://github.com/stark4280/siteantrenman)
 
 ## 🚀 Özellikler
 
 ### 🏋️ **Set Bazlı Takip Sistemi**
 - Her egzersiz için ayrı set checkbox'ları
 - Otomatik set sayısı algılama (4x10-12 → 4 checkbox)
-- Set bazlı ilerleme takibi
-- LocalStorage ile veri saklama
+- Set bazlı ilerleme ve haftalık hedef (Pzt-Çrş-Cuma tamamlanınca sıfırlama teklifi)
+- LocalStorage + Firestore (bulut senkron)
 
 ### ⏰ **Akıllı Dinlenme Timer'ı**
 - Set tamamlandığında otomatik başlar
-- Arka planda çalışmaya devam eder
-- Mobil vibrasyon bildirimi
+- Son set sonrası egzersiz arası daha uzun dinlenme
+- Arka planda çalışmaya devam eder (ses yok, sadece vibrasyon)
 - Progress bar ile görsel geri bildirim
 
 ### 📱 **Mobil Optimizasyon**
-- Responsive tasarım
-- Touch-friendly arayüz
-- PWA desteği
-- Offline çalışma
+- Responsive, dokunma dostu arayüz
+- PWA (Ana ekrana ekle banner’ı – Android prompt, iOS yönerge)
+- Offline çalışma (service worker önbelleği)
 
 ### 🎯 **Egzersiz Detayları**
-- 5 saniye basılı tutunca açılır
+- Uzun basınca (0.5 sn) açılır
 - Detaylı nasıl yapılır açıklamaları
-- Kas grupları bilgisi
+- Kas grupları ve Türkçe+İngilizce karşılıklar
 - Önemli ipuçları ve güvenlik uyarıları
 
 ## 🎨 **Tasarım Özellikleri**
 
-- **Modern Glassmorphism** tasarım
-- **Gradient renkler** ve animasyonlar
-- **Smooth transitions** ve hover efektleri
-- **Dark/Light mode** hazırlığı
-- **Professional UI/UX**
+- **Minimal siyah-gri** tema, yüksek kontrast
+- Net tipografi (Inter + JetBrains Mono zamanlayıcı)
+- Daha geniş dokunma hedefleri ve ferah boşluklar
 
 ## 📱 **Kullanım**
 
@@ -52,7 +48,7 @@
 - Timer otomatik başlar
 
 ### 3. **Egzersiz Detayları**
-- Egzersize 5 saniye basılı tutun
+- Egzersize kısa süre (0.5 sn) basılı tutun
 - Detaylı açıklamaları okuyun
 - Kas gruplarını öğrenin
 
@@ -63,18 +59,17 @@
 
 ## 🛠️ **Teknik Detaylar**
 
-- **Vanilla JavaScript** - Framework bağımsız
-- **CSS3** - Modern animasyonlar ve grid
-- **HTML5** - Semantic markup
-- **LocalStorage** - Veri saklama
-- **Web APIs** - Vibrasyon, Audio
+- **Vanilla JavaScript**, **HTML5**, **CSS3**
+- **LocalStorage** + **Firestore** (anonim oturum, bulut senkron)
+- **Web APIs** – Vibrasyon
+- **PWA** – manifest + service worker, A2HS banner
 
 ## 🚀 **GitHub Pages'de Yayınlama**
 
 ### 1. **Repository Ayarları**
 ```bash
 # Repository'yi klonlayın
-git clone https://github.com/yourusername/siteantrenman.git
+git clone https://github.com/stark4280/siteantrenman.git
 cd siteantrenman
 
 # GitHub Pages'i aktif edin
@@ -90,7 +85,7 @@ git commit -m "🚀 Initial release"
 git push origin main
 
 # GitHub Pages otomatik deploy eder
-# https://yourusername.github.io/siteantrenman/
+# https://stark4280.github.io/siteantrenman/
 ```
 
 ## 📁 **Dosya Yapısı**
@@ -100,22 +95,19 @@ siteantrenman/
 ├── index.html          # Ana sayfa
 ├── README.md           # Bu dosya
 ├── .gitignore          # Git ignore
-└── assets/             # Görseller (opsiyonel)
-    ├── favicon.ico
-    ├── og-image.png
-    └── apple-touch-icon.png
+├── sw.js               # Service worker (PWA)
+├── manifest.webmanifest# PWA manifest
+└── icons/              # PWA ikonları (ekleyin)
+    ├── icon-192.png
+    ├── icon-512.png
+    └── maskable-512.png
 ```
 
 ## 🎯 **Gelecek Özellikler**
 
-- [ ] **Çoklu kullanıcı** desteği
-- [ ] **Antrenman geçmişi** ve istatistikler
-- [ ] **Kişisel rekorlar** takibi
-- [ ] **Beslenme** ve su takibi
-- [ ] **Hedef belirleme** sistemi
-- [ ] **Sosyal medya** entegrasyonu
-- [ ] **Push bildirimleri**
-- [ ] **Offline PWA** desteği
+- [ ] Haftalık/aylık istatistikler ve grafikler
+- [ ] Hedef belirleme
+- [ ] Push bildirimleri (isteğe bağlı)
 
 ## 🤝 **Katkıda Bulunma**
 
@@ -137,8 +129,8 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 ## 📞 **İletişim**
 
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **Proje**: [Fitness Tracker Pro](https://github.com/yourusername/siteantrenman)
+- **GitHub**: [@stark4280](https://github.com/stark4280)
+- **Proje**: [Fitness Tracker](https://github.com/stark4280/siteantrenman)
 
 ---
 

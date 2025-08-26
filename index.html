@@ -39,13 +39,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://yourusername.github.io/siteantrenman/favicon-16x16.png">
     
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSL4YEKTP0"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VWFF5M9T9H"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-CSL4YEKTP0');
+      gtag('config', 'G-VWFF5M9T9H');
     </script>
 <!-- Typography: Inter -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1126,6 +1126,8 @@ try {
 
     window.cloudSync = { enabled: true, setPreset, setSet, setPR, subscribeCurrentUser };
     enabled = true;
+    // Notify main script that cloud is ready
+    window.dispatchEvent(new Event('cloudready'));
   }
 } catch (e) {
   window.cloudSync = { enabled: false };
@@ -1614,6 +1616,11 @@ const programs = {
                 if (badge) badge.textContent = 'Senkronize';
             });
         }
+
+        // Cloud hazır olur olmaz otomatik başlat (sayfa açılışında)
+        window.addEventListener('cloudready', () => {
+            startCloudSync();
+        });
 
         // A2HS (Add to Home Screen) banner - sadece ilk girişte
         let deferredPrompt = null;
@@ -2182,7 +2189,10 @@ const programs = {
         setupUserSelector();
         loadUserData();
         updateUserTheme();
-        startCloudSync();
+        // Start immediately if cloud already available
+        if (window.cloudSync && window.cloudSync.enabled) {
+            startCloudSync();
+        }
         daySelect.value = activeDays[0];
 showProgram(parseInt(daySelect.value));
         daySelect.addEventListener("change", () => {
