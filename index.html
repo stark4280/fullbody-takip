@@ -1,9 +1,42 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💪 Fitness Tracker Pro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💪 Fitness Tracker Pro - Arkadaşlarla Antrenman Takibi</title>
+    <meta name="description" content="Arkadaşlarla birlikte antrenman yapın! Set bazlı takip, dinlenme timer'ı ve detaylı egzersiz açıklamaları ile fitness hedeflerinize ulaşın.">
+    <meta name="keywords" content="fitness, antrenman, egzersiz, spor, timer, dinlenme, set takibi">
+    <meta name="author" content="Fitness Tracker Pro">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourusername.github.io/siteantrenman/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/siteantrenman/">
+    <meta property="og:title" content="💪 Fitness Tracker Pro">
+    <meta property="og:description" content="Arkadaşlarla birlikte antrenman yapın! Set bazlı takip ve dinlenme timer'ı ile fitness hedeflerinize ulaşın.">
+    <meta property="og:image" content="https://yourusername.github.io/siteantrenman/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourusername.github.io/siteantrenman/">
+    <meta property="twitter:title" content="💪 Fitness Tracker Pro">
+    <meta property="twitter:description" content="Arkadaşlarla birlikte antrenman yapın! Set bazlı takip ve dinlenme timer'ı ile fitness hedeflerinize ulaşın.">
+    <meta property="twitter:image" content="https://yourusername.github.io/siteantrenman/og-image.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="./manifest.webmanifest">
+    <meta name="theme-color" content="#0b1220">
+    <!-- iOS PWA meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://yourusername.github.io/siteantrenman/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://yourusername.github.io/siteantrenman/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://yourusername.github.io/siteantrenman/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://yourusername.github.io/siteantrenman/favicon-16x16.png">
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSL4YEKTP0"></script>
@@ -14,7 +47,19 @@
 
       gtag('config', 'G-CSL4YEKTP0');
     </script>
+<!-- Typography: Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+        :root {
+            --user-color: #111827; /* neutral black */
+            --text: #0f172a; /* near black */
+            --muted: #374151; /* gray-700 */
+            --border: #e5e7eb; /* gray-200 */
+            --bg: #f7f8fa; /* light gray */
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,47 +67,117 @@
         }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+            background: linear-gradient(135deg, #0b1220 0%, #111827 100%);
             min-height: 100vh;
-    color: #333;
-            padding: 20px;
+    color: var(--text);
+    padding: 20px;
+    line-height: 1.6;
         }
+
+
 
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 10px 30px rgba(0, 0, 0, 0.06);
             overflow: hidden;
+            border: 1px solid var(--border);
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px 20px;
+            background: linear-gradient(135deg, #0b1220 0%, #111827 100%);
+            color: #ffffff;
+            padding: 28px 20px;
     text-align: center;
+            position: relative;
+            border-radius: 12px;
+            border: 1px solid #1f2937;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+        }
+        .sync-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #111827;
+            color: #ffffff;
+            border: 1px solid #1f2937;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+        /* Add to Home Screen banner */
+        .a2hs-banner {
+            position: fixed;
+            left: 50%;
+            bottom: 16px;
+            transform: translateX(-50%);
+            background: #111827;
+            color: #ffffff;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+            padding: 12px 14px;
+            z-index: 1005;
+            max-width: 92%;
+            display: none;
+        }
+        .a2hs-text { font-size: 0.95rem; margin-bottom: 8px; text-align: center; }
+        .a2hs-actions { display: flex; gap: 10px; justify-content: center; }
+        .a2hs-btn { padding: 10px 14px; border-radius: 10px; border: 1px solid #374151; font-weight: 700; font-size: 0.9rem; }
+        .a2hs-btn-primary { background: #0ea5e9; color: #ffffff; border-color: #0ea5e9; }
+        .a2hs-btn-secondary { background: #1f2937; color: #ffffff; }
+        
+
+                .header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #ffffff;
+            letter-spacing: 0.2px;
+        }
+
+        .user-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .user-btn {
+            background: #ffffff;
+            border: 2px solid rgba(31, 41, 55, 0.1);
+            color: #334155;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
             position: relative;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-    margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        .user-btn::before { display: none; }
+
+        .user-btn:hover::before { display: none; }
+
+        .user-btn:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: rgba(31, 41, 55, 0.2);
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+        .user-btn.active {
+            background: var(--user-color);
+            border-color: var(--user-color);
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
+
+        .header::after { display: none; }
 
         .controls {
             padding: 30px 20px;
@@ -121,7 +236,7 @@ body {
             font-size: 2rem;
             font-weight: 700;
             color: #495057;
-            margin-bottom: 10px;
+    margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -134,10 +249,11 @@ body {
         }
 
         .progress-section {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
             text-align: center;
         }
 
@@ -149,60 +265,45 @@ body {
         }
 
         .progress-container {
-            background: #e9ecef;
-    border-radius: 20px;
+            background: #f1f5f9;
+            border-radius: 12px;
             overflow: hidden;
-            height: 25px;
+            height: 14px;
             position: relative;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #4ecdc4, #45b7d1, #667eea);
+            background: var(--user-color);
             width: 0%;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 20px;
+            transition: width 0.4s ease;
+            border-radius: 12px;
             position: relative;
         }
 
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
+        
 
         .exercise-list {
             list-style: none;
             display: grid;
-            gap: 15px;
+            gap: 22px;
         }
 
         .exercise-item {
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 15px;
-    padding: 20px;
-            transition: all 0.3s ease;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
         .exercise-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-color: #667eea;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            border-color: #d1d5db;
         }
 
         .exercise-item.completed {
@@ -229,6 +330,37 @@ body {
             flex: 1;
         }
 
+        .exercise-pr {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .pr-input {
+            width: 84px;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+            background: #ffffff;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            color: var(--text);
+        }
+
+        .pr-input:focus {
+            outline: none;
+            border-color: #111827;
+            box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+        }
+
+        .pr-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
         .exercise-sets {
             display: flex;
             gap: 15px;
@@ -237,31 +369,31 @@ body {
         }
 
         .set-checkbox {
-            width: 32px;
-            height: 32px;
-            border: 3px solid #667eea;
-            border-radius: 8px;
+            width: 38px;
+            height: 38px;
+            border: 2px solid #111827;
+            border-radius: 6px;
             cursor: pointer;
             position: relative;
-            background: white;
-            transition: all 0.3s ease;
+            background: #ffffff;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
             font-weight: bold;
-            color: #667eea;
+            color: #111827;
         }
 
         .set-checkbox:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transform: scale(1.03);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
         }
 
         .set-checkbox:checked {
-            background: #667eea;
-            color: white;
-            transform: scale(1.05);
+            background: #111827;
+            color: #ffffff;
+            transform: scale(1.03);
         }
 
         .set-checkbox:checked::after {
@@ -276,11 +408,11 @@ body {
         }
 
         .set-label {
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin-top: 8px;
+            font-size: 1rem;
+            color: #374151;
+            margin-top: 10px;
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .exercise-details {
@@ -288,16 +420,15 @@ body {
         }
 
         .exercise-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 5px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a; /* near-black */
+            margin-bottom: 4px;
         }
 
         .exercise-rest {
-            font-size: 0.9rem;
-            color: #6c757d;
-            font-style: italic;
+            font-size: 0.92rem;
+            color: #374151; /* gray-700 */
         }
 
         .completed .exercise-name {
@@ -314,7 +445,7 @@ body {
         }
 
         .btn {
-            padding: 15px 30px;
+            padding: 18px 32px;
             border: none;
             border-radius: 12px;
             font-size: 1rem;
@@ -328,7 +459,7 @@ body {
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--user-color);
             color: white;
         }
 
@@ -338,7 +469,7 @@ body {
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            background: #0ea5e9;
             color: white;
         }
 
@@ -416,6 +547,24 @@ body {
 
             .exercise-name {
                 font-size: 1rem;
+            }
+
+            .header-features {
+                gap: 10px;
+            }
+
+            .feature-tag {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .footer {
+                padding: 30px 15px 15px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
         }
 
@@ -498,11 +647,11 @@ body {
 
         .timer-display {
             font-size: 4rem;
-            font-weight: 900;
-            color: #667eea;
+            font-weight: 700;
+            color: var(--user-color);
             margin: 30px 0;
-            font-family: 'Courier New', monospace;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            letter-spacing: 1px;
         }
 
         .timer-progress {
@@ -516,7 +665,7 @@ body {
 
         .timer-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #4ecdc4, #45b7d1, #667eea);
+            background: var(--user-color);
             width: 100%;
             transition: width 1s linear;
             border-radius: 10px;
@@ -527,12 +676,13 @@ body {
             gap: 15px;
             justify-content: center;
             margin-top: 30px;
+            touch-action: manipulation;
         }
 
         .timer-btn {
             padding: 12px 24px;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -542,7 +692,7 @@ body {
         }
 
         .timer-btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--user-color);
             color: white;
         }
 
@@ -552,7 +702,7 @@ body {
         }
 
         .timer-btn-secondary {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            background: #ef4444;
             color: white;
         }
 
@@ -560,6 +710,8 @@ body {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
         }
+
+        
 
         .timer-close {
             position: absolute;
@@ -605,6 +757,27 @@ body {
         .notification-badge.show {
             display: block;
         }
+
+        /* Hafta Sıfırlama Modal */
+        .week-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none; justify-content: center; align-items: center;
+            z-index: 1002;
+            backdrop-filter: blur(4px);
+        }
+        .week-modal.active { display: flex; }
+        .week-content {
+            background: #ffffff; border-radius: 16px; padding: 24px; width: 90%; max-width: 420px;
+            text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+        .week-title { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+        .week-sub { font-size: 0.95rem; color: #475569; margin-bottom: 20px; }
+        .week-actions { display: flex; gap: 10px; justify-content: center; }
+        .week-btn { padding: 10px 16px; border: 0; border-radius: 10px; font-weight: 600; cursor: pointer; }
+        .week-btn-primary { background: var(--user-color); color: #fff; }
+        .week-btn-secondary { background: #e5e7eb; color: #111827; }
 
         /* Egzersiz Detay Modal */
         .exercise-modal {
@@ -658,17 +831,17 @@ body {
 
         .exercise-modal-title {
             font-size: 1.8rem;
-            font-weight: 700;
-            color: #495057;
+            font-weight: 800;
+            color: #0b1220;
             margin-bottom: 20px;
             padding-right: 40px;
         }
 
         .exercise-modal-subtitle {
-            font-size: 1.1rem;
-            color: #667eea;
+            font-size: 1.05rem;
+            color: #1f2937;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
         .exercise-modal-description {
@@ -688,14 +861,15 @@ body {
         }
 
         .exercise-modal-steps h4 {
-            color: #495057;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+            color: #0f172a;
+            margin-bottom: 14px;
+            font-size: 1.05rem;
+            font-weight: 700;
         }
 
         .exercise-modal-steps ol {
             padding-left: 20px;
-            color: #495057;
+            color: #0f172a;
         }
 
         .exercise-modal-steps li {
@@ -704,22 +878,23 @@ body {
         }
 
         .exercise-modal-tips {
-            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 4px solid #2196f3;
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 18px 0;
+            border-left: 4px solid #111827;
         }
 
         .exercise-modal-tips h4 {
-            color: #1976d2;
+            color: #0f172a;
             margin-bottom: 10px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            font-weight: 700;
         }
 
         .exercise-modal-tips ul {
             padding-left: 20px;
-            color: #1976d2;
+            color: #111827;
         }
 
         .exercise-modal-tips li {
@@ -729,19 +904,25 @@ body {
         .exercise-modal-muscles {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             justify-content: center;
-            margin: 20px 0;
+            margin: 18px 0;
         }
 
         .muscle-tag {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            background: #111827; /* black */
+            color: #ffffff; /* white */
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.95rem;
             font-weight: 600;
+            letter-spacing: 0.2px;
         }
+        .muscle-translations { margin-top: 10px; padding-left: 0; list-style: none; text-align: left; }
+        .muscle-translations li { color: #374151; font-size: 0.92rem; margin: 2px 0; }
+        .muscle-more { background: #1f2937; color: #fff; padding: 6px 10px; border-radius: 999px; font-size: 0.9rem; font-weight: 700; }
+
+        /* Footer styles removed */
 
         /* Mobil uyumluluk için timer modal */
         @media (max-width: 768px) {
@@ -776,8 +957,13 @@ body {
 <body>
 <div class="container">
         <div class="header">
-            <h1>💪 Fitness Tracker Pro</h1>
-            <p>Hedeflerinize odaklanın, sonuçları görün!</p>
+            <h1 id="userHeader">💪 Çağlar - Fitness Tracker</h1>
+            <div class="user-selector">
+                <button class="user-btn active" data-user="caglar">Çağlar</button>
+                <button class="user-btn" data-user="enes">Enes</button>
+            </div>
+            <div class="sync-badge" id="syncBadge">Çevrimdışı</div>
+            
         </div>
 
         <div class="controls">
@@ -809,13 +995,7 @@ body {
             </div>
 
             <ul class="exercise-list" id="programList"></ul>
-
-                    <div class="action-buttons">
-            <button class="btn btn-primary" onclick="resetDay()">
-                🔄 Bu Günü Sıfırla
-            </button>
-        </div>
-    </div>
+</div>
 </div>
 
 <!-- Dinlenme Timer Modal -->
@@ -827,9 +1007,18 @@ body {
         <div class="timer-progress">
             <div class="timer-progress-bar" id="timerProgressBar"></div>
         </div>
-        <div class="timer-buttons">
-            <button class="timer-btn timer-btn-secondary" onclick="closeTimer()">İptal</button>
-        </div>
+                <div class="timer-buttons">
+                    <button class="timer-btn timer-btn-secondary" onclick="closeTimer()">İptal</button>
+                </div>
+    </div>
+</div>
+
+<!-- Add to Home Screen Banner -->
+<div class="a2hs-banner" id="a2hsBanner">
+    <div class="a2hs-text" id="a2hsText">Uygulamayı ana ekrana ekleyin: Daha hızlı erişim ve tam ekran deneyim!</div>
+    <div class="a2hs-actions">
+        <button class="a2hs-btn a2hs-btn-secondary" onclick="dismissA2HS()">Kapat</button>
+        <button class="a2hs-btn a2hs-btn-primary" id="a2hsInstallBtn" style="display:none">Yükle</button>
     </div>
 </div>
 
@@ -837,6 +1026,18 @@ body {
 <div class="notification-badge" id="notificationBadge">
     <div>⏰ Dinlenme süresi bitti!</div>
 </div>
+
+<!-- Hafta Sıfırlama Modal -->
+<div class="week-modal" id="weekModal">
+    <div class="week-content">
+        <div class="week-title">Hafta sıfırlansın mı?</div>
+        <div class="week-sub">Pzt-Çrş-Cuma toplam 72 set tamamlandı. Seçili kullanıcı için haftayı sıfırlamak ister misin?</div>
+        <div class="week-actions">
+            <button class="week-btn week-btn-secondary" onclick="closeWeekModal()">İptal</button>
+            <button class="week-btn week-btn-primary" onclick="confirmWeekReset()">Sıfırla</button>
+        </div>
+    </div>
+    </div>
 
 <!-- Egzersiz Detay Modal -->
 <div class="exercise-modal" id="exerciseModal">
@@ -869,7 +1070,70 @@ body {
 </div>
 </div>
 
+<!-- Firebase Cloud Sync (Firestore) -->
+<script type="module">
+// Cloud Sync: Proje yapılandırması (doğrudan entegre edildi)
+const firebaseConfig = {
+  apiKey: "AIzaSyDMMTU5MF4TNPwoS6sRAuv2UrIOBylBCOM",
+  authDomain: "takip-32df7.firebaseapp.com",
+  projectId: "takip-32df7",
+  storageBucket: "takip-32df7.firebasestorage.app",
+  messagingSenderId: "263707042265",
+  appId: "1:263707042265:web:d6d7de9eaaeb60c92579c8",
+  measurementId: "G-VWFF5M9T9H"
+};
+
+let enabled = false;
+try {
+  const valid = firebaseConfig && firebaseConfig.apiKey;
+  if (valid) {
+    const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
+    const { getFirestore, enableIndexedDbPersistence, doc, setDoc, updateDoc, onSnapshot, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js');
+    const { getAuth, signInAnonymously, onAuthStateChanged } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js');
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    try { await enableIndexedDbPersistence(db); } catch (e) {}
+    await signInAnonymously(auth).catch(()=>{});
+
+    async function ensureDoc(userId) {
+      const ref = doc(db, 'profiles', userId);
+      await setDoc(ref, { createdAt: serverTimestamp() }, { merge: true });
+      return ref;
+    }
+
+    async function setPreset(userId, value) {
+      const ref = await ensureDoc(userId);
+      await updateDoc(ref, { preset: value, updatedAt: serverTimestamp() });
+    }
+
+    async function setSet(userId, key, value) {
+      const ref = await ensureDoc(userId);
+      await updateDoc(ref, { ["sets."+key]: value, updatedAt: serverTimestamp() });
+    }
+
+    async function setPR(userId, key, value) {
+      const ref = await ensureDoc(userId);
+      await updateDoc(ref, { ["prs."+key]: value, updatedAt: serverTimestamp() });
+    }
+
+    function subscribeCurrentUser(userId, callback) {
+      ensureDoc(userId);
+      const ref = doc(db, 'profiles', userId);
+      return onSnapshot(ref, (snap) => callback(snap.data() || {}));
+    }
+
+    window.cloudSync = { enabled: true, setPreset, setSet, setPR, subscribeCurrentUser };
+    enabled = true;
+  }
+} catch (e) {
+  window.cloudSync = { enabled: false };
+}
+</script>
+
 <script>
+        // openCloudModal kaldırıldı (buton kaldırıldı)
 const programs = {
             "A": [
                 { 
@@ -1174,12 +1438,221 @@ const programs = {
         const activeDays = [1, 3, 5]; // Pazartesi Çarşamba Cuma
         const dayNames = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
         
+        // Kullanıcı sistemi
+        let currentUser = 'caglar';
+        const users = {
+            caglar: { name: 'Çağlar', color: '#667eea' },
+            enes: { name: 'Enes', color: '#ff6b6b' }
+        };
+        
         const daySelect = document.getElementById("daySelect");
         const programTitle = document.getElementById("programTitle");
         const programList = document.getElementById("programList");
         const progressBar = document.getElementById("progressBar");
         const progressText = document.getElementById("progressText");
         const presetSelect = document.getElementById("presetSelect");
+
+        // Kullanıcı değiştirme sistemi
+        function setupUserSelector() {
+            const userBtns = document.querySelectorAll('.user-btn');
+            userBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const user = btn.dataset.user;
+                    if (user !== currentUser) {
+                        // Eski kullanıcının verilerini kaydet
+                        saveCurrentUserData();
+                        
+                        // Yeni kullanıcıya geç
+                        currentUser = user;
+                        
+                        // Active class'ı güncelle
+                        userBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        // Renk temasını güncelle
+                        updateUserTheme();
+                        
+                        // Yeni kullanıcının verilerini yükle
+                        loadUserData();
+                        
+                        // Cloud sync'i yeniden başlat
+                        startCloudSync();
+
+                        // Programı yeniden yükle
+                        showProgram(parseInt(daySelect.value));
+                    }
+                });
+            });
+        }
+
+        // Mevcut kullanıcının verilerini kaydet
+        function saveCurrentUserData() {
+            const currentPreset = presetSelect.value;
+            localStorage.setItem(`${currentUser}_preset`, currentPreset);
+        }
+
+        // Kullanıcı verilerini yükle
+        function loadUserData() {
+            const savedPreset = localStorage.getItem(`${currentUser}_preset`) || "ABA";
+            presetSelect.value = savedPreset;
+        }
+
+        // PR güncelleme fonksiyonu
+        let useCloud = false;
+        let cloudUnsub = null;
+
+        function updatePR(prKey, value) {
+            if (useCloud && window.cloudSync && window.cloudSync.enabled) {
+                if (value && Number(value) > 0) {
+                    window.cloudSync.setPR(currentUser, prKey, Number(value));
+                } else {
+                    window.cloudSync.setPR(currentUser, prKey, null);
+                }
+            }
+            if (value && Number(value) > 0) {
+                localStorage.setItem(prKey, String(value));
+            } else {
+                localStorage.removeItem(prKey);
+            }
+        }
+
+        // Spotify iptal edildi - fonksiyon kaldırıldı
+
+        // Kullanıcı temasını güncelle
+        function updateUserTheme() {
+            const user = users[currentUser];
+            document.documentElement.style.setProperty('--user-color', user.color);
+            
+            // Progress bar rengini güncelle
+            // Renkleri CSS değişkenleriyle güncelle
+            document.documentElement.style.setProperty('--footer-li-color', user.color);
+            document.documentElement.style.setProperty('--footer-h3-color', user.color);
+            document.documentElement.style.setProperty('--footer-h4-color', `${user.color}88`);
+
+            // Kullanıcı adını güncelle
+            const header = document.getElementById('userHeader');
+            if (header) {
+                header.textContent = `${user.name}`;
+            }
+            const badge = document.getElementById('syncBadge');
+            if (badge) badge.style.borderColor = '#1f2937';
+
+            // Exercise modal renkleri sabit nötr temaya çekildi
+
+            // Set checkbox renklerini güncelle
+            document.documentElement.style.setProperty('--set-checkbox-color', user.color);
+
+            // Exercise item border renklerini güncelle
+            document.documentElement.style.setProperty('--exercise-item-border-color', user.color);
+
+            // Set checkbox renklerini güncelle
+            document.documentElement.style.setProperty('--set-checkbox-color', user.color);
+
+            // Exercise item border renklerini güncelle
+            document.documentElement.style.setProperty('--exercise-item-border-color', user.color);
+
+            // Exercise item border renklerini güncelleyeyim
+            document.documentElement.style.setProperty('--exercise-item-border-color', user.color);
+
+            // PR input border renklerini güncelle
+            const prInputs = document.querySelectorAll('.pr-input');
+            prInputs.forEach(input => {
+                input.style.borderColor = user.color;
+            });
+        }
+
+        function applyProfileToUI(profile) {
+            if (!profile) return;
+            if (profile.preset && presetSelect.value !== profile.preset) {
+                presetSelect.value = profile.preset;
+            }
+            const dayIndex = parseInt(daySelect.value);
+            const programKey = getProgramForDay(dayIndex);
+            const todayData = programs[programKey];
+            // Apply sets
+            if (profile.sets) {
+                todayData.forEach((item, index) => {
+                    const setCount = parseSetCount(item.name);
+                    for (let i = 1; i <= setCount; i++) {
+                        const key = `${dayIndex}_${programKey}_${index}_set${i}`;
+                        const checked = profile.sets[key] === true;
+                        const el = document.getElementById(`set${index}_${i}`);
+                        if (el) el.checked = checked;
+                    }
+                });
+            }
+            // Apply PRs
+            if (profile.prs) {
+                todayData.forEach((item, index) => {
+                    const prKey = getPRKey(programKey, item.name);
+                    const val = profile.prs[prKey];
+                    if (val != null) {
+                        const prInput = document.querySelectorAll('.exercise-item .pr-input')[index];
+                        if (prInput) prInput.value = val;
+                        localStorage.setItem(prKey, String(val));
+                    }
+                });
+            }
+            updateProgress(dayIndex, programKey);
+        }
+
+        function startCloudSync() {
+            useCloud = !!(window.cloudSync && window.cloudSync.enabled);
+            if (!useCloud) {
+                const badge = document.getElementById('syncBadge');
+                if (badge) badge.textContent = 'Çevrimdışı';
+                return;
+            }
+            const badge = document.getElementById('syncBadge');
+            if (badge) badge.textContent = 'Senkronize ediliyor';
+            if (cloudUnsub) { try { cloudUnsub(); } catch (e) {} cloudUnsub = null; }
+            cloudUnsub = window.cloudSync.subscribeCurrentUser(currentUser, (profile) => {
+                // Re-render current day to ensure DOM exists, then apply
+                showProgram(parseInt(daySelect.value));
+                setTimeout(() => applyProfileToUI(profile), 0);
+                const badge = document.getElementById('syncBadge');
+                if (badge) badge.textContent = 'Senkronize';
+            });
+        }
+
+        // A2HS (Add to Home Screen) banner - sadece ilk girişte
+        let deferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            localStorage.getItem('a2hs_dismissed') || showA2HS(true);
+        });
+        function showA2HS(canInstall) {
+            const banner = document.getElementById('a2hsBanner');
+            const btn = document.getElementById('a2hsInstallBtn');
+            if (!banner) return;
+            banner.style.display = 'block';
+            if (btn) btn.style.display = canInstall ? 'inline-block' : 'none';
+        }
+        function dismissA2HS() {
+            const banner = document.getElementById('a2hsBanner');
+            if (banner) banner.style.display = 'none';
+            localStorage.setItem('a2hs_dismissed', '1');
+        }
+        const a2hsInstallBtn = document.getElementById('a2hsInstallBtn');
+        if (a2hsInstallBtn) {
+            a2hsInstallBtn.addEventListener('click', async () => {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                await deferredPrompt.userChoice;
+                dismissA2HS();
+                deferredPrompt = null;
+            });
+        }
+
+        // iOS için yönlendirme (beforeinstallprompt yok): yalnız ilk girişte göster
+        const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+        if (isIOS && !isStandalone && !localStorage.getItem('a2hs_dismissed')) {
+            const text = document.getElementById('a2hsText');
+            if (text) text.textContent = 'iOS: Paylaş > Ana Ekrana Ekle ile uygulamayı yükleyin.';
+            showA2HS(false);
+        }
 
 // Gün seçim dropdown
         activeDays.forEach(day => {
@@ -1190,15 +1663,17 @@ const programs = {
 });
 
 // Preset ve gün kaydetme
-        presetSelect.value = localStorage.getItem("preset") || "ABA";
         presetSelect.addEventListener("change", () => {
-            localStorage.setItem("preset", presetSelect.value);
+            localStorage.setItem(`${currentUser}_preset`, presetSelect.value);
+            if (useCloud && window.cloudSync && window.cloudSync.enabled) {
+                window.cloudSync.setPreset(currentUser, presetSelect.value);
+            }
     showProgram(parseInt(daySelect.value));
 });
 
 // ABA-BAB mantığı
         function getProgramForDay(dayIndex) {
-            const preset = localStorage.getItem("preset") || "ABA";
+            const preset = localStorage.getItem(`${currentUser}_preset`) || "ABA";
             const pos = activeDays.indexOf(dayIndex);
             if (preset === "ABA") return (pos % 2 === 0) ? "A" : "B";
             else return (pos % 2 === 0) ? "B" : "A";
@@ -1250,7 +1725,7 @@ const programs = {
             updateProgress(dayIndex, programKey);
 }
 
-        // İlerleme bar
+// İlerleme bar
         function updateProgress(dayIndex, programKey) {
             const todayData = programs[programKey];
             let totalSets = 0;
@@ -1269,27 +1744,78 @@ const programs = {
             const percent = Math.round((completedSets / totalSets) * 100);
             progressBar.style.width = percent + "%";
             progressText.innerText = `İlerleme: ${completedSets}/${totalSets} set tamamlandı`;
+            // Haftalık tamamlama kontrolü
+            checkWeeklyCompletion();
         }
 
-        // Sıfırlama
-        function resetDay() {
-            const dayIndex = parseInt(daySelect.value);
-            const programKey = getProgramForDay(dayIndex);
-            
-            programs[programKey].forEach((item, index) => {
+        function countDaySets(userId, targetDay) {
+            const programKey = getProgramForDay(targetDay);
+            const list = programs[programKey];
+            let total = 0;
+            list.forEach((item, idx) => {
                 const setCount = parseSetCount(item.name);
-                
                 for (let i = 1; i <= setCount; i++) {
-                    const setChk = document.getElementById(`set${index}_${i}`);
-                    if (setChk) {
-                        setChk.checked = false;
-                        localStorage.setItem(`${dayIndex}_${programKey}_${index}_set${i}`, "false");
-                    }
+                    const saved = localStorage.getItem(`${userId}_${targetDay}_${programKey}_${idx}_set${i}`);
+                    if (saved === "true") total++;
                 }
             });
-            
-            updateProgress(dayIndex, programKey);
+            return total;
         }
+
+        function checkWeeklyCompletion() {
+            const days = [1, 3, 5]; // Pazartesi, Çarşamba, Cuma
+            const expectedPerDay = 24;
+            const modal = document.getElementById('weekModal');
+            const allMet = days.every(d => countDaySets(currentUser, d) >= expectedPerDay);
+            if (allMet && modal && !modal.classList.contains('active')) {
+                openWeekModal();
+            }
+        }
+
+        function openWeekModal() {
+            const m = document.getElementById('weekModal');
+            if (m) m.classList.add('active');
+        }
+        function closeWeekModal() {
+            const m = document.getElementById('weekModal');
+            if (m) m.classList.remove('active');
+        }
+        function confirmWeekReset() {
+            const days = [1, 3, 5];
+            // Local reset (only for currentUser)
+            days.forEach(d => {
+                const programKey = getProgramForDay(d);
+                programs[programKey].forEach((item, index) => {
+                    const setCount = parseSetCount(item.name);
+                    for (let i = 1; i <= setCount; i++) {
+                        localStorage.setItem(`${currentUser}_${d}_${programKey}_${index}_set${i}`, "false");
+                    }
+                });
+            });
+
+            // Cloud reset if enabled
+            if (useCloud && window.cloudSync && window.cloudSync.enabled) {
+                days.forEach(d => {
+                    const programKey = getProgramForDay(d);
+                    programs[programKey].forEach((item, index) => {
+                        const setCount = parseSetCount(item.name);
+                        for (let i = 1; i <= setCount; i++) {
+                            const key = `${d}_${programKey}_${index}_set${i}`;
+                            window.cloudSync.setSet(currentUser, key, false);
+                        }
+                    });
+                });
+            }
+
+            closeWeekModal();
+            showProgram(parseInt(daySelect.value));
+        }
+
+        // Ekranı açık tut: Screen Wake Lock API
+        // Kullanıcı isteğiyle wake lock ve çıkış uyarısı kaldırıldı
+
+// Sıfırlama
+        // Gün sıfırlama kaldırıldı (haftalık sıfırlama mevcut)
 
         // Timer değişkenleri
         let timerInterval;
@@ -1308,6 +1834,23 @@ const programs = {
         function parseSetCount(exerciseName) {
             const match = exerciseName.match(/(\d+)x/);
             return match ? parseInt(match[1]) : 3;
+        }
+
+        // Yardımcılar: PR anahtarı ve uzun dinlenme süresi
+        function slugify(text) {
+            return String(text)
+                .toLowerCase()
+                .replace(/[^\w]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
+        function getPRKey(programKey, exerciseName) {
+            return `${currentUser}_pr_${programKey}_${slugify(exerciseName)}`;
+        }
+
+        function getLongRestSeconds(shortRestSeconds) {
+            // Set arası kısa dinlenme; egzersiz arası daha uzun
+            return shortRestSeconds >= 90 ? 180 : 120;
         }
 
         // Timer modal'ını göster
@@ -1410,12 +1953,53 @@ const programs = {
             // Kas gruplarını göster
             const musclesContainer = document.getElementById('exerciseModalMuscles');
             musclesContainer.innerHTML = '';
-            exerciseData.muscles.forEach(muscle => {
+            const maxTags = 3;
+            const showMore = exerciseData.muscles.length > maxTags;
+            exerciseData.muscles.slice(0, maxTags).forEach(muscle => {
                 const muscleTag = document.createElement('span');
                 muscleTag.className = 'muscle-tag';
                 muscleTag.textContent = muscle;
                 musclesContainer.appendChild(muscleTag);
             });
+            if (showMore) {
+                const more = document.createElement('span');
+                more.className = 'muscle-more';
+                more.textContent = `+${exerciseData.muscles.length - maxTags}`;
+                musclesContainer.appendChild(more);
+            }
+            // Türkçe + İngilizce karşılıkları
+            const tr = document.createElement('ul');
+            tr.className = 'muscle-translations';
+            const map = {
+                'Quadriceps': 'Quadriceps (Ön uyluk)',
+                'Hamstrings': 'Hamstrings (Arka uyluk)',
+                'Glutes': 'Gluteus (Kalça)',
+                'Pectoralis Major': 'Pectoralis Major (Göğüs)',
+                'Upper Pectoralis': 'Üst göğüs (Upper Pectoralis)',
+                'Triceps': 'Triceps (Arka kol)',
+                'Biceps Brachii': 'Biseps (Ön kol)',
+                'Brachialis': 'Brachialis (Ön kol kası)',
+                'Forearms': 'Önkol',
+                'Deltoids': 'Deltoid (Omuz)',
+                'Anterior Deltoid': 'Ön deltoid (Ön omuz)',
+                'Lateral Deltoid': 'Yan deltoid (Yan omuz)',
+                'Trapezius': 'Trapez',
+                'Latissimus Dorsi': 'Latissimus Dorsi (Kanat)',
+                'Rhomboids': 'Rhomboid (Sırt ortası)',
+                'Erector Spinae': 'Erector Spinae (Bel ekstansörleri)',
+                'Hip Flexors': 'Kalça bükücüler',
+                'Rectus Abdominis': 'Rectus Abdominis (Karın)',
+                'Obliques': 'Oblik (Yan karın)'
+            };
+            const added = new Set();
+            exerciseData.muscles.slice(0, 4).forEach(m => {
+                const label = map[m] || m;
+                if (added.has(label)) return; added.add(label);
+                const li = document.createElement('li');
+                li.textContent = label;
+                tr.appendChild(li);
+            });
+            musclesContainer.appendChild(tr);
             
             // Adımları göster
             const stepsContainer = document.getElementById('exerciseModalSteps');
@@ -1460,7 +2044,7 @@ const programs = {
                 }, 500); // 500ms = 0.5 saniye
             });
             
-            li.addEventListener('touchend', () => {
+            li.addEventListener('touchend', (e) => {
                 clearTimeout(pressTimer);
                 if (isLongPress) {
                     isLongPress = false;
@@ -1514,12 +2098,18 @@ const programs = {
                         </div>
                     `;
                 }
-                
+                const prKey = getPRKey(programKey, item.name);
                 li.innerHTML = `
                     <div class="exercise-content">
                         <div class="exercise-details">
                             <div class="exercise-name">${item.name}</div>
                             <div class="exercise-rest">${item.rest}</div>
+                            <div class="exercise-pr">
+                                <input type="number" class="pr-input" placeholder="PR (kg)" 
+                                       value="${localStorage.getItem(prKey) || ''}"
+                                       onchange="updatePR('${prKey}', this.value)">
+                                <span class="pr-label">Personal Record</span>
+                            </div>
                             <div class="exercise-sets">
                                 ${setCheckboxes}
                             </div>
@@ -1532,7 +2122,7 @@ const programs = {
                 // Set checkbox'larını kontrol et ve event listener'ları ekle
                 for (let i = 1; i <= setCount; i++) {
                     const setChk = document.getElementById(`set${index}_${i}`);
-                    const saved = localStorage.getItem(`${dayIndex}_${programKey}_${index}_set${i}`);
+                    const saved = localStorage.getItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`);
                     
                     if (saved === "true") {
                         setChk.checked = true;
@@ -1541,15 +2131,32 @@ const programs = {
                     // Set checkbox event listener
                     setChk.addEventListener("change", () => {
                         if (setChk.checked) {
-                            localStorage.setItem(`${dayIndex}_${programKey}_${index}_set${i}`, "true");
-                            
+                            localStorage.setItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`, "true");
+                            if (useCloud && window.cloudSync && window.cloudSync.enabled) {
+                                const key = `${dayIndex}_${programKey}_${index}_set${i}`;
+                                window.cloudSync.setSet(currentUser, key, true);
+                            }
                             // Dinlenme süresi varsa timer başlat
-                            const restSeconds = parseRestTime(item.rest);
-                            if (restSeconds > 0) {
-                                showTimerModal(restSeconds);
+                            const shortRest = parseRestTime(item.rest);
+                            let secondsToUse = shortRest;
+                            // Son set tamamlandı mı?
+                            let allDone = true;
+                            for (let s = 1; s <= setCount; s++) {
+                                const chkEl = document.getElementById(`set${index}_${s}`);
+                                if (!chkEl || !chkEl.checked) { allDone = false; break; }
+                            }
+                            if (allDone) {
+                                secondsToUse = getLongRestSeconds(shortRest);
+                            }
+                            if (secondsToUse > 0) {
+                                showTimerModal(secondsToUse);
                             }
                         } else {
-                            localStorage.setItem(`${dayIndex}_${programKey}_${index}_set${i}`, "false");
+                            localStorage.setItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`, "false");
+                            if (useCloud && window.cloudSync && window.cloudSync.enabled) {
+                                const key = `${dayIndex}_${programKey}_${index}_set${i}`;
+                                window.cloudSync.setSet(currentUser, key, false);
+                            }
                         }
                         updateProgress(dayIndex, programKey);
                     });
@@ -1562,12 +2169,27 @@ const programs = {
             updateProgress(dayIndex, programKey);
         }
 
+
+
+// Service worker register (PWA)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(() => {});
+            });
+        }
+
 // Başlangıç
+        setupUserSelector();
+        loadUserData();
+        updateUserTheme();
+        startCloudSync();
         daySelect.value = activeDays[0];
 showProgram(parseInt(daySelect.value));
         daySelect.addEventListener("change", () => {
             showProgram(parseInt(daySelect.value));
         });
 </script>
+
+    
 </body>
 </html>
