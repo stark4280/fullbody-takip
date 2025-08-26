@@ -61,7 +61,7 @@
         }
 
         * {
-            margin: 0;
+    margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
@@ -294,7 +294,7 @@ body {
             background: #ffffff;
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 20px;
+    padding: 20px;
             transition: all 0.2s ease;
             cursor: pointer;
             position: relative;
@@ -569,27 +569,7 @@ body {
             }
         }
 
-        /* Animasyonlar */
-        .exercise-item {
-            animation: slideIn 0.5s ease forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .exercise-item:nth-child(1) { animation-delay: 0.1s; }
-        .exercise-item:nth-child(2) { animation-delay: 0.2s; }
-        .exercise-item:nth-child(3) { animation-delay: 0.3s; }
-        .exercise-item:nth-child(4) { animation-delay: 0.4s; }
-        .exercise-item:nth-child(5) { animation-delay: 0.5s; }
-        .exercise-item:nth-child(6) { animation-delay: 0.6s; }
-        .exercise-item:nth-child(7) { animation-delay: 0.7s; }
+        /* Animasyonlar kaldırıldı - senkron sırasında sabit görünüm */
 
         /* Dinlenme Timer Modal */
         .timer-modal {
@@ -1611,7 +1591,8 @@ const programs = {
             const badge = document.getElementById('syncBadge');
             if (badge) badge.textContent = 'Senkronize ediliyor';
             if (cloudUnsub) { try { cloudUnsub(); } catch (e) {} cloudUnsub = null; }
-            cloudUnsub = window.cloudSync.subscribeCurrentUser(currentUser, (profile) => {
+            const targetUser = currentUser === 'together' ? 'together' : currentUser;
+            cloudUnsub = window.cloudSync.subscribeCurrentUser(targetUser, (profile) => {
                 // Re-render current day to ensure DOM exists, then apply
                 showProgram(parseInt(daySelect.value));
                 setTimeout(() => applyProfileToUI(profile), 0);
@@ -1679,8 +1660,8 @@ const programs = {
             if (useCloud && window.cloudSync && window.cloudSync.enabled) {
                 window.cloudSync.setPreset(kUser, presetSelect.value);
             }
-            showProgram(parseInt(daySelect.value));
-        });
+    showProgram(parseInt(daySelect.value));
+});
 
 // ABA-BAB mantığı
         function getProgramForDay(dayIndex) {
@@ -2193,8 +2174,8 @@ const programs = {
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js').catch(() => {});
-            });
-        }
+    });
+}
 
 // Başlangıç
         setupUserSelector();
