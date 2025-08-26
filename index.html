@@ -2133,6 +2133,16 @@ const programs = {
                                 const target = currentUser === 'together' ? 'together' : currentUser;
                                 window.cloudSync.setSet(target, key, true);
                             }
+                            // Birlikte modunda Çağlar ve Enes profillerine de yansıt
+                            if (currentUser === 'together') {
+                                ['caglar','enes'].forEach(u => {
+                                    localStorage.setItem(`${u}_${dayIndex}_${programKey}_${index}_set${i}`, "true");
+                                    if (useCloud && window.cloudSync && window.cloudSync.enabled) {
+                                        const key = `${dayIndex}_${programKey}_${index}_set${i}`;
+                                        window.cloudSync.setSet(u, key, true);
+                                    }
+                                });
+                            }
                             // Dinlenme süresi varsa timer başlat
                             const shortRest = parseRestTime(item.rest);
                             let secondsToUse = shortRest;
@@ -2155,6 +2165,16 @@ const programs = {
                                 const key = `${dayIndex}_${programKey}_${index}_set${i}`;
                                 const target = currentUser === 'together' ? 'together' : currentUser;
                                 window.cloudSync.setSet(target, key, false);
+                            }
+                            // Birlikte modunda Çağlar ve Enes profillerinden de kaldır
+                            if (currentUser === 'together') {
+                                ['caglar','enes'].forEach(u => {
+                                    localStorage.setItem(`${u}_${dayIndex}_${programKey}_${index}_set${i}`, "false");
+                                    if (useCloud && window.cloudSync && window.cloudSync.enabled) {
+                                        const key = `${dayIndex}_${programKey}_${index}_set${i}`;
+                                        window.cloudSync.setSet(u, key, false);
+                                    }
+                                });
                             }
                         }
                         updateProgress(dayIndex, programKey);
