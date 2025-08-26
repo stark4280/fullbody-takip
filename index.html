@@ -176,6 +176,7 @@ body {
             color: #ffffff;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
+        
 
         .header::after { display: none; }
 
@@ -961,6 +962,7 @@ body {
             <div class="user-selector">
                 <button class="user-btn active" data-user="caglar">Çağlar</button>
                 <button class="user-btn" data-user="enes">Enes</button>
+                <button class="user-btn together-btn" data-user="together">Birlikte</button>
             </div>
             <div class="sync-badge" id="syncBadge">Çevrimdışı</div>
             
@@ -1444,7 +1446,8 @@ const programs = {
         let currentUser = 'caglar';
         const users = {
             caglar: { name: 'Çağlar', color: '#667eea' },
-            enes: { name: 'Enes', color: '#ff6b6b' }
+            enes: { name: 'Enes', color: '#ff6b6b' },
+            together: { name: 'Birlikte', color: '#10b981' }
         };
         
         const daySelect = document.getElementById("daySelect");
@@ -1495,7 +1498,7 @@ const programs = {
 
         // Kullanıcı verilerini yükle
         function loadUserData() {
-            const savedPreset = localStorage.getItem(`${currentUser}_preset`) || "ABA";
+            const savedPreset = localStorage.getItem(`${currentUser === 'together' ? 'together' : currentUser}_preset`) || "ABA";
             presetSelect.value = savedPreset;
         }
 
@@ -1671,16 +1674,18 @@ const programs = {
 
 // Preset ve gün kaydetme
         presetSelect.addEventListener("change", () => {
-            localStorage.setItem(`${currentUser}_preset`, presetSelect.value);
+            const kUser = currentUser === 'together' ? 'together' : currentUser;
+            localStorage.setItem(`${kUser}_preset`, presetSelect.value);
             if (useCloud && window.cloudSync && window.cloudSync.enabled) {
-                window.cloudSync.setPreset(currentUser, presetSelect.value);
+                window.cloudSync.setPreset(kUser, presetSelect.value);
             }
-    showProgram(parseInt(daySelect.value));
-});
+            showProgram(parseInt(daySelect.value));
+        });
 
 // ABA-BAB mantığı
         function getProgramForDay(dayIndex) {
-            const preset = localStorage.getItem(`${currentUser}_preset`) || "ABA";
+            const kUser = currentUser === 'together' ? 'together' : currentUser;
+            const preset = localStorage.getItem(`${kUser}_preset`) || "ABA";
             const pos = activeDays.indexOf(dayIndex);
             if (preset === "ABA") return (pos % 2 === 0) ? "A" : "B";
             else return (pos % 2 === 0) ? "B" : "A";
@@ -1852,7 +1857,9 @@ const programs = {
         }
 
         function getPRKey(programKey, exerciseName) {
-            return `${currentUser}_pr_${programKey}_${slugify(exerciseName)}`;
+            // Birlikte modunda ortak anahtar kullan
+            const userKey = currentUser === 'together' ? 'together' : currentUser;
+            return `${userKey}_pr_${programKey}_${slugify(exerciseName)}`;
         }
 
         function getLongRestSeconds(shortRestSeconds) {
@@ -2129,7 +2136,7 @@ const programs = {
                 // Set checkbox'larını kontrol et ve event listener'ları ekle
                 for (let i = 1; i <= setCount; i++) {
                     const setChk = document.getElementById(`set${index}_${i}`);
-                    const saved = localStorage.getItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`);
+                    const saved = localStorage.getItem(`${currentUser === 'together' ? 'together' : currentUser}_${dayIndex}_${programKey}_${index}_set${i}`);
                     
                     if (saved === "true") {
                         setChk.checked = true;
@@ -2138,10 +2145,12 @@ const programs = {
                     // Set checkbox event listener
                     setChk.addEventListener("change", () => {
                         if (setChk.checked) {
-                            localStorage.setItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`, "true");
+                            const kUser = currentUser === 'together' ? 'together' : currentUser;
+                            localStorage.setItem(`${kUser}_${dayIndex}_${programKey}_${index}_set${i}`, "true");
                             if (useCloud && window.cloudSync && window.cloudSync.enabled) {
                                 const key = `${dayIndex}_${programKey}_${index}_set${i}`;
-                                window.cloudSync.setSet(currentUser, key, true);
+                                const target = currentUser === 'together' ? 'together' : currentUser;
+                                window.cloudSync.setSet(target, key, true);
                             }
                             // Dinlenme süresi varsa timer başlat
                             const shortRest = parseRestTime(item.rest);
@@ -2159,10 +2168,12 @@ const programs = {
                                 showTimerModal(secondsToUse);
                             }
                         } else {
-                            localStorage.setItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`, "false");
+                            const kUser = currentUser === 'together' ? 'together' : currentUser;
+                            localStorage.setItem(`${kUser}_${dayIndex}_${programKey}_${index}_set${i}`, "false");
                             if (useCloud && window.cloudSync && window.cloudSync.enabled) {
                                 const key = `${dayIndex}_${programKey}_${index}_set${i}`;
-                                window.cloudSync.setSet(currentUser, key, false);
+                                const target = currentUser === 'together' ? 'together' : currentUser;
+                                window.cloudSync.setSet(target, key, false);
                             }
                         }
                         updateProgress(dayIndex, programKey);
