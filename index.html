@@ -1459,12 +1459,13 @@ const programs = {
                         
                         // Yeni kullanıcının verilerini yükle
                         loadUserData();
-                        
-                        // Cloud sync'i yeniden başlat
-                        startCloudSync();
 
                         // Programı yeniden yükle
                         showProgram(parseInt(daySelect.value));
+                        // Anlık görünüm için önbellekteki profil değerlerini uygula
+                        if (profileCache[currentUser]) {
+                            applyProfileToUI(profileCache[currentUser]);
+                        }
                     }
                 });
             });
@@ -1484,7 +1485,9 @@ const programs = {
 
         // PR güncelleme fonksiyonu
         let useCloud = false;
-        let cloudUnsub = null;
+        const cloudUnsubs = {};
+        const profileCache = { caglar: null, enes: null, together: null };
+        const loadedUsers = new Set();
 
         function updatePR(prKey, value) {
             if (useCloud && window.cloudSync && window.cloudSync.enabled) {
@@ -1581,29 +1584,29 @@ const programs = {
             updateProgress(dayIndex, programKey);
         }
 
-        function startCloudSync() {
+        function startCloudSyncAll() {
             useCloud = !!(window.cloudSync && window.cloudSync.enabled);
-            if (!useCloud) {
-                const badge = document.getElementById('syncBadge');
-                if (badge) badge.textContent = 'Çevrimdışı';
-                return;
-            }
             const badge = document.getElementById('syncBadge');
+            if (!useCloud) { if (badge) badge.textContent = 'Çevrimdışı'; return; }
             if (badge) badge.textContent = 'Senkronize ediliyor';
-            if (cloudUnsub) { try { cloudUnsub(); } catch (e) {} cloudUnsub = null; }
-            const targetUser = currentUser === 'together' ? 'together' : currentUser;
-            cloudUnsub = window.cloudSync.subscribeCurrentUser(targetUser, (profile) => {
-                // Re-render current day to ensure DOM exists, then apply
-                showProgram(parseInt(daySelect.value));
-                setTimeout(() => applyProfileToUI(profile), 0);
-                const badge = document.getElementById('syncBadge');
-                if (badge) badge.textContent = 'Senkronize';
+
+            ['caglar','enes','together'].forEach(userId => {
+                if (cloudUnsubs[userId]) return; // already subscribed
+                cloudUnsubs[userId] = window.cloudSync.subscribeCurrentUser(userId, (profile) => {
+                    profileCache[userId] = profile || {};
+                    loadedUsers.add(userId);
+                    if (userId === currentUser) {
+                        // DOM zaten mevcut; sadece değerleri uygula (yeniden render yok)
+                        applyProfileToUI(profileCache[userId]);
+                    }
+                    if (loadedUsers.size === 3 && badge) badge.textContent = 'Senkronize';
+                });
             });
         }
 
         // Cloud hazır olur olmaz otomatik başlat (sayfa açılışında)
         window.addEventListener('cloudready', () => {
-            startCloudSync();
+            startCloudSyncAll();
         });
 
         // A2HS (Add to Home Screen) banner - sadece ilk girişte
@@ -2203,7 +2206,7 @@ const programs = {
         updateUserTheme();
         // Start immediately if cloud already available
         if (window.cloudSync && window.cloudSync.enabled) {
-            startCloudSync();
+            startCloudSyncAll();
         }
         daySelect.value = activeDays[0];
 showProgram(parseInt(daySelect.value));
