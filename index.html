@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💪 Fitness Tracker Pro - Arkadaşlarla Antrenman Takibi</title>
+    <title>BATMAN - Full Body Program</title>
     <meta name="description" content="Arkadaşlarla birlikte antrenman yapın! Set bazlı takip, dinlenme timer'ı ve detaylı egzersiz açıklamaları ile fitness hedeflerinize ulaşın.">
     <meta name="keywords" content="fitness, antrenman, egzersiz, spor, timer, dinlenme, set takibi">
     <meta name="author" content="Fitness Tracker Pro">
@@ -53,7 +53,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
         :root {
-            --user-color: #111827; /* neutral black */
+            --user-color: #facc15; /* yellow accent */
             --text: #0f172a; /* near black */
             --muted: #374151; /* gray-700 */
             --border: #e5e7eb; /* gray-200 */
@@ -228,6 +228,35 @@ body {
             padding: 30px 20px;
         }
 
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 12px 0 0 0;
+        }
+        .toggle-btn {
+            background: #0f172a;
+            color: #cbd5e1;
+            border: 1px solid #1f2937;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .toggle-btn.active { background: var(--user-color); color: #111827; border-color: var(--user-color); }
+
+        /* Guide (Rehber) */
+        .guide-section { display: none; padding: 30px 20px; }
+        .guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+        .guide-card { background: #0f172a; border: 1px solid #1f2937; border-radius: 12px; padding: 16px; cursor: pointer; color: var(--text); }
+        .guide-card h3 { color: var(--user-color); margin-bottom: 8px; font-size: 1.1rem; }
+        .accordion { margin-top: 10px; display: none; color: #cbd5e1; }
+        .guide-card.open .accordion { display: block; }
+        .guide-card ul, .guide-card p { margin-left: 16px; }
+
+        /* Level badge */
+        .level-badge { margin: 8px auto 0 auto; display: inline-block; background: #111827; border: 1px solid #1f2937; color: var(--user-color); padding: 6px 10px; border-radius: 999px; font-weight: 800; letter-spacing: .3px; }
+
         .program-header {
             text-align: center;
             margin-bottom: 30px;
@@ -250,18 +279,30 @@ body {
         }
 
         .progress-section {
-            background: #ffffff;
-            border: 1px solid var(--border);
+            background: #0b0f1a;
+            border: 1px solid #1f2937;
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 24px;
             text-align: center;
         }
 
+        .warmup {
+            background: #111827;
+            color: #facc15;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            padding: 12px 14px;
+            text-align: center;
+            margin: 10px 0 16px 0;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
         .progress-text {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #495057;
+            color: var(--text);
             margin-bottom: 15px;
         }
 
@@ -291,8 +332,8 @@ body {
         }
 
         .exercise-item {
-            background: #ffffff;
-            border: 1px solid var(--border);
+            background: #0f172a;
+            border: 1px solid #1f2937;
             border-radius: 12px;
     padding: 20px;
             transition: all 0.2s ease;
@@ -303,8 +344,8 @@ body {
 
         .exercise-item:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-            border-color: #d1d5db;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+            border-color: var(--user-color);
         }
 
         .exercise-item.completed {
@@ -341,11 +382,11 @@ body {
         .pr-input {
             width: 84px;
             padding: 8px;
-            border: 1px solid var(--border);
+            border: 1px solid #1f2937;
             border-radius: 8px;
             font-size: 14px;
             text-align: center;
-            background: #ffffff;
+            background: #0b0f1a;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
             color: var(--text);
         }
@@ -358,7 +399,7 @@ body {
 
         .pr-label {
             font-size: 12px;
-            color: #666;
+            color: #cbd5e1;
             font-weight: 500;
         }
 
@@ -372,18 +413,18 @@ body {
         .set-checkbox {
             width: 38px;
             height: 38px;
-            border: 2px solid #111827;
+            border: 2px solid var(--user-color);
             border-radius: 6px;
             cursor: pointer;
             position: relative;
-            background: #ffffff;
+            background: #111827;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
             font-weight: bold;
-            color: #111827;
+            color: var(--user-color);
         }
 
         .set-checkbox:hover {
@@ -392,8 +433,8 @@ body {
         }
 
         .set-checkbox:checked {
-            background: #111827;
-            color: #ffffff;
+            background: var(--user-color);
+            color: #111827;
             transform: scale(1.03);
         }
 
@@ -423,13 +464,13 @@ body {
         .exercise-name {
             font-size: 1.15rem;
             font-weight: 700;
-            color: #0f172a; /* near-black */
+            color: #e5e7eb;
             margin-bottom: 4px;
         }
 
         .exercise-rest {
             font-size: 0.92rem;
-            color: #374151; /* gray-700 */
+            color: #cbd5e1;
         }
 
         .completed .exercise-name {
@@ -470,8 +511,8 @@ body {
         }
 
         .btn-secondary {
-            background: #0ea5e9;
-            color: white;
+            background: var(--user-color);
+            color: #111827;
         }
 
         .btn-secondary:hover {
@@ -938,11 +979,10 @@ body {
 <body>
 <div class="container">
         <div class="header">
-            <h1 id="userHeader">💪 Çağlar - Fitness Tracker</h1>
+            <h1 id="userHeader">BATMAN</h1>
             <div class="user-selector">
                 <button class="user-btn active" data-user="caglar">Çağlar</button>
                 <button class="user-btn" data-user="enes">Enes</button>
-                <button class="user-btn together-btn" data-user="together">Birlikte</button>
             </div>
             <div class="sync-badge" id="syncBadge">Çevrimdışı</div>
             
@@ -950,13 +990,7 @@ body {
 
         <div class="controls">
             <div class="select-group">
-                <div class="select-wrapper">
-                    <label for="presetSelect">Program Düzeni</label>
-<select id="presetSelect">
-                        <option value="ABA">ABA Düzeni</option>
-                        <option value="BAB">BAB Düzeni</option>
-</select>
-                </div>
+                
                 <div class="select-wrapper">
                     <label for="daySelect">Antrenman Günü</label>
 <select id="daySelect"></select>
@@ -966,7 +1000,7 @@ body {
 
         <div class="program-section">
             <div class="program-header">
-                <h2 class="program-title" id="programTitle">Program A</h2>
+                <h2 class="program-title" id="programTitle">Batman Full Body</h2>
             </div>
 
             <div class="progress-section">
@@ -1052,6 +1086,11 @@ body {
 </div>
 </div>
 
+<!-- Alt Bekleme ile Açılan Sıfırlama Butonu -->
+<div id="bottomResetBtn" style="display:none; position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px; z-index: 1005;">
+    <button class="btn btn-secondary" onclick="hideBottomReset();openWeekModal()">Haftayı Sıfırla</button>
+    </div>
+
 <!-- Firebase Cloud Sync (Firestore) -->
 <script type="module">
 // Cloud Sync: Proje yapılandırması (doğrudan entegre edildi)
@@ -1119,303 +1158,32 @@ try {
 <script>
         // openCloudModal kaldırıldı (buton kaldırıldı)
 const programs = {
-            "A": [
-                { 
-                    name: "Leg Press – 4x10-12", 
-                    rest: "Dinlenme: 90 sn",
-                    type: "Bacak Egzersizi",
-                    muscles: ["Quadriceps", "Glutes", "Hamstrings"],
-                    description: "Leg Press, bacak kaslarını güçlendirmek için kullanılan temel bir egzersizdir. Makine üzerinde yapılır ve güvenli bir şekilde ağır yüklerle çalışmanızı sağlar.",
-                    steps: [
-                        "Makineye oturun ve ayaklarınızı platforma yerleştirin",
-                        "Ayaklarınızı omuz genişliğinde açın",
-                        "Güvenlik kollarını kaldırın",
-                        "Nefes alarak platformu aşağı doğru itin",
-                        "Bacaklarınızı tamamen düzeltmeden durun",
-                        "Kontrol ederek başlangıç pozisyonuna dönün"
-                    ],
-                    tips: [
-                        "Sırtınızı her zaman sandalyeye yaslayın",
-                        "Dizlerinizi ayak parmaklarınızla aynı yönde tutun",
-                        "Ağırlığı topuklarınızla itin, parmak uçlarınızla değil",
-                        "Hareketi kontrollü yapın, momentum kullanmayın"
-                    ]
-                },
-                { 
-                    name: "Bench Press – 4x8-10", 
-                    rest: "Dinlenme: 90 sn",
-                    type: "Göğüs Egzersizi",
-                    muscles: ["Pectoralis Major", "Triceps", "Anterior Deltoid"],
-                    description: "Bench Press, göğüs kaslarını geliştirmek için en etkili egzersizlerden biridir. Üst vücut gücünü artırır ve kas kütlesi kazanımı sağlar.",
-                    steps: [
-                        "Bench'e sırt üstü uzanın",
-                        "Ayaklarınızı yerde düz tutun",
-                        "Barı omuz genişliğinden biraz daha geniş tutun",
-                        "Barı göğsünüzün ortasına doğru indirin",
-                        "Nefes vererek barı yukarı itin",
-                        "Kollarınızı tamamen düzeltmeden durun"
-                    ],
-                    tips: [
-                        "Kürek kemiklerinizi birbirine yaklaştırın",
-                        "Kalçanızı bench'ten kaldırmayın",
-                        "Barı kontrollü indirin ve hızlı kaldırın",
-                        "Spotter kullanmayı unutmayın"
-                    ]
-                },
-                { 
-                    name: "Barbell Row – 4x8-10", 
-                    rest: "Dinlenme: 90 sn",
-                    type: "Sırt Egzersizi",
-                    muscles: ["Latissimus Dorsi", "Rhomboids", "Trapezius"],
-                    description: "Barbell Row, sırt kaslarını güçlendirmek ve geliştirmek için mükemmel bir egzersizdir. Postürünüzü iyileştirir ve üst vücut gücünü artırır.",
-                    steps: [
-                        "Ayaklarınızı omuz genişliğinde açın",
-                        "Hafifçe dizlerinizi bükün ve öne eğilin",
-                        "Barı alt bacaklarınızın önünde tutun",
-                        "Kürek kemiklerinizi sıkıştırarak barı göbeğinize doğru çekin",
-                        "Dirseklerinizi vücudunuza yakın tutun",
-                        "Kontrol ederek barı indirin"
-                    ],
-                    tips: [
-                        "Sırtınızı düz tutun, yuvarlamayın",
-                        "Ağırlığı kollarınızla değil, sırt kaslarınızla çekin",
-                        "Dirseklerinizi vücudunuza yakın tutun",
-                        "Hareketi omuzlarınızla değil, kürek kemiklerinizle yapın"
-                    ]
-                },
-                { 
-                    name: "Overhead Press – 3x10-12", 
-                    rest: "Dinlenme: 60-75 sn",
-                    type: "Omuz Egzersizi",
-                    muscles: ["Deltoids", "Triceps", "Trapezius"],
-                    description: "Overhead Press, omuz kaslarını güçlendirmek için temel bir egzersizdir. Üst vücut gücünü artırır ve omuz stabilitesini geliştirir.",
-                    steps: [
-                        "Barı omuz seviyesinde tutun",
-                        "Ayaklarınızı omuz genişliğinde açın",
-                        "Karın kaslarınızı sıkın",
-                        "Barı başınızın üzerine doğru itin",
-                        "Kollarınızı tamamen düzeltin",
-                        "Kontrol ederek barı indirin"
-                    ],
-                    tips: [
-                        "Sırtınızı düz tutun",
-                        "Barı başınızın önünde değil, üzerinde tutun",
-                        "Karın kaslarınızı sıkın",
-                        "Hareketi kontrollü yapın"
-                    ]
-                },
-                { 
-                    name: "Barbell Curl – 3x10-12", 
-                    rest: "Dinlenme: 45-60 sn",
-                    type: "Biceps Egzersizi",
-                    muscles: ["Biceps Brachii", "Brachialis", "Forearms"],
-                    description: "Barbell Curl, biceps kaslarını geliştirmek için klasik bir egzersizdir. Kol gücünü artırır ve kas tanımını geliştirir.",
-                    steps: [
-                        "Ayaklarınızı omuz genişliğinde açın",
-                        "Barı alt kavrayışla tutun",
-                        "Dirseklerinizi vücudunuza yakın tutun",
-                        "Barı omuzlarınıza doğru kaldırın",
-                        "Biceps kaslarınızı sıkın",
-                        "Kontrol ederek barı indirin"
-                    ],
-                    tips: [
-                        "Dirseklerinizi sabit tutun",
-                        "Sallanmayın, kontrollü hareket edin",
-                        "Biceps kaslarınızı sıkın",
-                        "Ağırlığı tamamen indirin"
-                    ]
-                },
-                { 
-                    name: "Triceps Pushdown – 3x10-12", 
-                    rest: "Dinlenme: 45-60 sn",
-                    type: "Triceps Egzersizi",
-                    muscles: ["Triceps Brachii", "Forearms"],
-                    description: "Triceps Pushdown, triceps kaslarını izole olarak çalıştırmak için mükemmel bir egzersizdir. Kol gücünü artırır ve kas tanımını geliştirir.",
-                    steps: [
-                        "Kabloyu üst seviyede tutun",
-                        "Ayaklarınızı omuz genişliğinde açın",
-                        "Dirseklerinizi vücudunuza yakın tutun",
-                        "Kabloyu aşağı doğru itin",
-                        "Kollarınızı tamamen düzeltin",
-                        "Kontrol ederek kabloyu yukarı çekin"
-                    ],
-                    tips: [
-                        "Dirseklerinizi sabit tutun",
-                        "Sadece ön kollarınızı hareket ettirin",
-                        "Triceps kaslarınızı sıkın",
-                        "Hareketi kontrollü yapın"
-                    ]
-                },
-                { 
-                    name: "Ab Crunch – 3x12-15", 
-                    rest: "Dinlenme: 30-45 sn",
-                    type: "Karın Egzersizi",
-                    muscles: ["Rectus Abdominis", "Obliques"],
-                    description: "Ab Crunch, karın kaslarını güçlendirmek için temel bir egzersizdir. Core gücünü artırır ve karın tanımını geliştirir.",
-                    steps: [
-                        "Sırt üstü yatın ve dizlerinizi bükün",
-                        "Ayaklarınızı yerde düz tutun",
-                        "Ellerinizi başınızın arkasına koyun",
-                        "Karın kaslarınızı sıkarak omuzlarınızı kaldırın",
-                        "Göğsünüzü dizlerinize doğru getirin",
-                        "Kontrol ederek başlangıç pozisyonuna dönün"
-                    ],
-                    tips: [
-                        "Boynunuzu zorlamayın",
-                        "Karın kaslarınızı sıkın",
-                        "Momentum kullanmayın",
-                        "Nefes alışverişini düzenli yapın"
-                    ]
-                }
+            1: [
+                { name: "Barbell Back Squat – 4x6-8", rest: "Dinlenme: 120 sn" },
+                { name: "Barbell Bench Press – 4x6-8", rest: "Dinlenme: 120 sn" },
+                { name: "Barbell Row – 4x8-10", rest: "Dinlenme: 90 sn" },
+                { name: "Dumbbell Overhead Press – 3x10", rest: "Dinlenme: 60-75 sn" },
+                { name: "Face Pull (cable) – 3x12-15", rest: "Dinlenme: 45-60 sn" },
+                { name: "Plank – 3xMax", rest: "Dinlenme: 45-60 sn" },
+                { name: "Cable Wrist Curl (bilek iç) – 3x15-20", rest: "Dinlenme: 45-60 sn" }
             ],
-            "B": [
-                { 
-                    name: "Deadlift – 4x6-8", 
-                    rest: "Dinlenme: 90-120 sn",
-                    type: "Bileşik Egzersiz",
-                    muscles: ["Erector Spinae", "Glutes", "Hamstrings", "Quadriceps"],
-                    description: "Deadlift, vücudun en güçlü egzersizlerinden biridir. Tüm vücut gücünü artırır, postürü iyileştirir ve kas kütlesi kazanımı sağlar.",
-                    steps: [
-                        "Barı ayaklarınızın ortasında tutun",
-                        "Ayaklarınızı omuz genişliğinde açın",
-                        "Dizlerinizi bükün ve kalçanızı geriye itin",
-                        "Barı alt kavrayışla tutun",
-                        "Göğsünüzü yukarı kaldırın ve sırtınızı düz tutun",
-                        "Barı bacaklarınız boyunca yukarı çekin"
-                    ],
-                    tips: [
-                        "Sırtınızı her zaman düz tutun",
-                        "Barı bacaklarınıza yakın tutun",
-                        "Kalçanızı ve dizlerinizi aynı anda açın",
-                        "Ağırlığı topuklarınızla itin"
-                    ]
-                },
-                { 
-                    name: "Incline Dumbbell Press – 4x8-10", 
-                    rest: "Dinlenme: 90 sn",
-                    type: "Göğüs Egzersizi",
-                    muscles: ["Upper Pectoralis", "Anterior Deltoid", "Triceps"],
-                    description: "Incline Dumbbell Press, üst göğüs kaslarını hedefleyen mükemmel bir egzersizdir. Göğüs kaslarının üst kısmını geliştirir.",
-                    steps: [
-                        "Incline bench'e 30-45 derece açıyla uzanın",
-                        "Dumbbell'ları göğüs seviyesinde tutun",
-                        "Avuç içlerinizi öne doğru çevirin",
-                        "Dumbbell'ları yukarı doğru itin",
-                        "Kollarınızı tamamen düzeltmeden durun",
-                        "Kontrol ederek dumbbell'ları indirin"
-                    ],
-                    tips: [
-                        "Kürek kemiklerinizi birbirine yaklaştırın",
-                        "Dumbbell'ları kontrollü indirin",
-                        "Kalçanızı bench'ten kaldırmayın",
-                        "Nefes alışverişini düzenli yapın"
-                    ]
-                },
-                { 
-                    name: "Lat Pulldown / Pull-up – 4x8-10", 
-                    rest: "Dinlenme: 90 sn",
-                    type: "Sırt Egzersizi",
-                    muscles: ["Latissimus Dorsi", "Biceps", "Rhomboids"],
-                    description: "Lat Pulldown, sırt kaslarını güçlendirmek için etkili bir egzersizdir. Geniş sırt kasları geliştirir ve üst vücut gücünü artırır.",
-                    steps: [
-                        "Barı üst kavrayışla tutun",
-                        "Ayaklarınızı sabitleyin",
-                        "Göğsünüzü yukarı kaldırın",
-                        "Barı göğsünüzün üst kısmına doğru çekin",
-                        "Kürek kemiklerinizi sıkıştırın",
-                        "Kontrol ederek barı yukarı bırakın"
-                    ],
-                    tips: [
-                        "Sallanmayın, kontrollü hareket edin",
-                        "Barı boynunuzun arkasına değil, göğsünüze çekin",
-                        "Kürek kemiklerinizi sıkıştırın",
-                        "Dirseklerinizi vücudunuza yakın tutun"
-                    ]
-                },
-                { 
-                    name: "Lateral Raises – 3x12-15", 
-                    rest: "Dinlenme: 45-60 sn",
-                    type: "Omuz Egzersizi",
-                    muscles: ["Lateral Deltoid", "Trapezius"],
-                    description: "Lateral Raises, omuz kaslarının yan kısmını izole olarak çalıştırmak için mükemmel bir egzersizdir. Omuz genişliğini artırır.",
-                    steps: [
-                        "Dumbbell'ları yanlarınızda tutun",
-                        "Ayaklarınızı omuz genişliğinde açın",
-                        "Dumbbell'ları yanlara doğru kaldırın",
-                        "Dirseklerinizi hafifçe bükün",
-                        "Omuz seviyesine kadar kaldırın",
-                        "Kontrol ederek dumbbell'ları indirin"
-                    ],
-                    tips: [
-                        "Ağırlığı çok ağır tutmayın",
-                        "Dirseklerinizi hafifçe bükün",
-                        "Sallanmayın, kontrollü hareket edin",
-                        "Omuz seviyesini geçmeyin"
-                    ]
-                },
-                { 
-                    name: "Hammer Curl – 3x10-12", 
-                    rest: "Dinlenme: 45-60 sn",
-                    type: "Biceps Egzersizi",
-                    muscles: ["Biceps Brachii", "Brachialis", "Forearms"],
-                    description: "Hammer Curl, biceps ve ön kol kaslarını birlikte çalıştıran etkili bir egzersizdir. Kol gücünü artırır ve kas tanımını geliştirir.",
-                    steps: [
-                        "Dumbbell'ları yanlarınızda tutun",
-                        "Avuç içlerinizi birbirine bakacak şekilde tutun",
-                        "Dirseklerinizi vücudunuza yakın tutun",
-                        "Dumbbell'ları omuzlarınıza doğru kaldırın",
-                        "Biceps kaslarınızı sıkın",
-                        "Kontrol ederek dumbbell'ları indirin"
-                    ],
-                    tips: [
-                        "Dirseklerinizi sabit tutun",
-                        "Sallanmayın, kontrollü hareket edin",
-                        "Biceps kaslarınızı sıkın",
-                        "Ağırlığı tamamen indirin"
-                    ]
-                },
-                { 
-                    name: "Overhead Dumbbell Extension – 3x10-12", 
-                    rest: "Dinlenme: 45-60 sn",
-                    type: "Triceps Egzersizi",
-                    muscles: ["Triceps Brachii", "Forearms"],
-                    description: "Overhead Dumbbell Extension, triceps kaslarını uzun pozisyonda çalıştırmak için mükemmel bir egzersizdir. Triceps gelişimini artırır.",
-                    steps: [
-                        "Dumbbell'ı başınızın üzerinde tutun",
-                        "Dirseklerinizi bükün",
-                        "Dumbbell'ı başınızın arkasına indirin",
-                        "Triceps kaslarınızı sıkarak dumbbell'ı yukarı itin",
-                        "Kollarınızı tamamen düzeltin",
-                        "Kontrol ederek dumbbell'ı indirin"
-                    ],
-                    tips: [
-                        "Dirseklerinizi sabit tutun",
-                        "Sadece ön kollarınızı hareket ettirin",
-                        "Triceps kaslarınızı sıkın",
-                        "Hareketi kontrollü yapın"
-                    ]
-                },
-                { 
-                    name: "Knee Raises – 3x12-15", 
-                    rest: "Dinlenme: 45-60 sn",
-                    type: "Karın Egzersizi",
-                    muscles: ["Rectus Abdominis", "Hip Flexors"],
-                    description: "Knee Raises, alt karın kaslarını hedefleyen etkili bir egzersizdir. Core gücünü artırır ve karın tanımını geliştirir.",
-                    steps: [
-                        "Pull-up bar'ına asılın",
-                        "Kollarınızı omuz genişliğinde açın",
-                        "Karın kaslarınızı sıkın",
-                        "Dizlerinizi göğsünüze doğru kaldırın",
-                        "Alt karın kaslarınızı sıkın",
-                        "Kontrol ederek bacaklarınızı indirin"
-                    ],
-                    tips: [
-                        "Sallanmayın, kontrollü hareket edin",
-                        "Karın kaslarınızı sıkın",
-                        "Momentum kullanmayın",
-                        "Nefes alışverişini düzenli yapın"
-                    ]
-                }
+            3: [
+                { name: "Deadlift (barbell veya trap bar) – 4x5", rest: "Dinlenme: 150-180 sn" },
+                { name: "Lat Pulldown (cable) – 4x10", rest: "Dinlenme: 90 sn" },
+                { name: "Incline Dumbbell Press – 4x10", rest: "Dinlenme: 90 sn" },
+                { name: "Leg Curl (machine) – 3x12", rest: "Dinlenme: 60-75 sn" },
+                { name: "Barbell Hip Thrust – 3x12", rest: "Dinlenme: 90 sn" },
+                { name: "Side Plank – 3xHer iki taraf", rest: "Dinlenme: 45-60 sn" },
+                { name: "Cable Reverse Wrist Curl (bilek dış) – 3x15-20", rest: "Dinlenme: 45-60 sn" }
+            ],
+            5: [
+                { name: "Front Squat veya Goblet Squat – 4x10", rest: "Dinlenme: 90 sn" },
+                { name: "Overhead Press (barbell/dumbbell) – 4x8-10", rest: "Dinlenme: 90 sn" },
+                { name: "Romanian Deadlift (barbell/dumbbell) – 4x10", rest: "Dinlenme: 90-120 sn" },
+                { name: "Seated Cable Row – 4x10-12", rest: "Dinlenme: 90 sn" },
+                { name: "Dumbbell Lateral Raise – 3x12-15", rest: "Dinlenme: 45-60 sn" },
+                { name: "Hanging Knee Raise (core) – 3x12-15", rest: "Dinlenme: 45-60 sn" },
+                { name: "Cable Wrist Roller – 3xTur (yukarı-aşağı)", rest: "Dinlenme: 60 sn" }
             ]
         };
 
@@ -1426,8 +1194,7 @@ const programs = {
         let currentUser = 'caglar';
         const users = {
             caglar: { name: 'Çağlar', color: '#667eea' },
-            enes: { name: 'Enes', color: '#ff6b6b' },
-            together: { name: 'Birlikte', color: '#10b981' }
+            enes: { name: 'Enes', color: '#ff6b6b' }
         };
         
         const daySelect = document.getElementById("daySelect");
@@ -1435,7 +1202,6 @@ const programs = {
         const programList = document.getElementById("programList");
         const progressBar = document.getElementById("progressBar");
         const progressText = document.getElementById("progressText");
-        const presetSelect = document.getElementById("presetSelect");
 
         // Kullanıcı değiştirme sistemi
         function setupUserSelector() {
@@ -1472,21 +1238,15 @@ const programs = {
         }
 
         // Mevcut kullanıcının verilerini kaydet
-        function saveCurrentUserData() {
-            const currentPreset = presetSelect.value;
-            localStorage.setItem(`${currentUser}_preset`, currentPreset);
-        }
+        function saveCurrentUserData() {}
 
         // Kullanıcı verilerini yükle
-        function loadUserData() {
-            const savedPreset = localStorage.getItem(`${currentUser === 'together' ? 'together' : currentUser}_preset`) || "ABA";
-            presetSelect.value = savedPreset;
-        }
+        function loadUserData() {}
 
         // PR güncelleme fonksiyonu
         let useCloud = false;
         const cloudUnsubs = {};
-        const profileCache = { caglar: null, enes: null, together: null };
+        const profileCache = { caglar: null, enes: null };
         const loadedUsers = new Set();
 
         function updatePR(prKey, value) {
@@ -1590,7 +1350,7 @@ const programs = {
             if (!useCloud) { if (badge) badge.textContent = 'Çevrimdışı'; return; }
             if (badge) badge.textContent = 'Senkronize ediliyor';
 
-            ['caglar','enes','together'].forEach(userId => {
+            ['caglar','enes'].forEach(userId => {
                 if (cloudUnsubs[userId]) return; // already subscribed
                 cloudUnsubs[userId] = window.cloudSync.subscribeCurrentUser(userId, (profile) => {
                     profileCache[userId] = profile || {};
@@ -1599,7 +1359,7 @@ const programs = {
                         // DOM zaten mevcut; sadece değerleri uygula (yeniden render yok)
                         applyProfileToUI(profileCache[userId]);
                     }
-                    if (loadedUsers.size === 3 && badge) badge.textContent = 'Senkronize';
+                    if (loadedUsers.size === 2 && badge) badge.textContent = 'Senkronize';
                 });
             });
         }
@@ -1656,32 +1416,25 @@ const programs = {
     daySelect.appendChild(opt);
 });
 
-// Preset ve gün kaydetme
-        presetSelect.addEventListener("change", () => {
-            const kUser = currentUser === 'together' ? 'together' : currentUser;
-            localStorage.setItem(`${kUser}_preset`, presetSelect.value);
-            if (useCloud && window.cloudSync && window.cloudSync.enabled) {
-                window.cloudSync.setPreset(kUser, presetSelect.value);
-            }
-    showProgram(parseInt(daySelect.value));
-});
+// Preset kaldırıldı
 
 // ABA-BAB mantığı
         function getProgramForDay(dayIndex) {
-            const kUser = currentUser === 'together' ? 'together' : currentUser;
-            const preset = localStorage.getItem(`${kUser}_preset`) || "ABA";
-            const pos = activeDays.indexOf(dayIndex);
-            if (preset === "ABA") return (pos % 2 === 0) ? "A" : "B";
-            else return (pos % 2 === 0) ? "B" : "A";
+            return dayIndex; // Batman: gün indeksine göre
 }
 
 // Program gösterme
         function showProgram(dayIndex) {
             const programKey = getProgramForDay(dayIndex);
-            programTitle.innerText = `Program ${programKey}`;
+            programTitle.innerText = `${dayNames[dayIndex]}`;
             programList.innerHTML = "";
             
             const todayData = programs[programKey];
+            // Isınma
+            const warm = document.createElement('li');
+            warm.className = 'warmup';
+            warm.textContent = 'Isınma: 5 dk yürüyüş + mobilite';
+            programList.appendChild(warm);
             todayData.forEach((item, index) => {
                 const li = document.createElement("li");
                 li.className = "exercise-item";
@@ -1841,9 +1594,7 @@ const programs = {
         }
 
         function getPRKey(programKey, exerciseName) {
-            // Birlikte modunda ortak anahtar kullan
-            const userKey = currentUser === 'together' ? 'together' : currentUser;
-            return `${userKey}_pr_${programKey}_${slugify(exerciseName)}`;
+            return `${currentUser}_pr_${programKey}_${slugify(exerciseName)}`;
         }
 
         function getLongRestSeconds(shortRestSeconds) {
@@ -2077,10 +1828,14 @@ const programs = {
                 // Program gösterme fonksiyonunu güncelle
         function showProgram(dayIndex) {
             const programKey = getProgramForDay(dayIndex);
-            programTitle.innerText = `Program ${programKey}`;
+            programTitle.innerText = `Batman Full Body – ${dayNames[dayIndex]}`;
             programList.innerHTML = "";
             
             const todayData = programs[programKey];
+            const warm = document.createElement('li');
+            warm.className = 'warmup';
+            warm.textContent = 'Isınma: 5 dk yürüyüş + mobilite';
+            programList.appendChild(warm);
             todayData.forEach((item, index) => {
                 const setCount = parseSetCount(item.name);
                 const li = document.createElement("li");
@@ -2120,7 +1875,7 @@ const programs = {
                 // Set checkbox'larını kontrol et ve event listener'ları ekle
                 for (let i = 1; i <= setCount; i++) {
                     const setChk = document.getElementById(`set${index}_${i}`);
-                    const saved = localStorage.getItem(`${currentUser === 'together' ? 'together' : currentUser}_${dayIndex}_${programKey}_${index}_set${i}`);
+                    const saved = localStorage.getItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`);
                     
                     if (saved === "true") {
                         setChk.checked = true;
@@ -2129,22 +1884,10 @@ const programs = {
                     // Set checkbox event listener
                     setChk.addEventListener("change", () => {
                         if (setChk.checked) {
-                            const kUser = currentUser === 'together' ? 'together' : currentUser;
-                            localStorage.setItem(`${kUser}_${dayIndex}_${programKey}_${index}_set${i}`, "true");
+                            localStorage.setItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`, "true");
                             if (useCloud && window.cloudSync && window.cloudSync.enabled) {
                                 const key = `${dayIndex}_${programKey}_${index}_set${i}`;
-                                const target = currentUser === 'together' ? 'together' : currentUser;
-                                window.cloudSync.setSet(target, key, true);
-                            }
-                            // Birlikte modunda Çağlar ve Enes profillerine de yansıt
-                            if (currentUser === 'together') {
-                                ['caglar','enes'].forEach(u => {
-                                    localStorage.setItem(`${u}_${dayIndex}_${programKey}_${index}_set${i}`, "true");
-                                    if (useCloud && window.cloudSync && window.cloudSync.enabled) {
-                                        const key = `${dayIndex}_${programKey}_${index}_set${i}`;
-                                        window.cloudSync.setSet(u, key, true);
-                                    }
-                                });
+                                window.cloudSync.setSet(currentUser, key, true);
                             }
                             // Dinlenme süresi varsa timer başlat
                             const shortRest = parseRestTime(item.rest);
@@ -2162,22 +1905,10 @@ const programs = {
                                 showTimerModal(secondsToUse);
                             }
                         } else {
-                            const kUser = currentUser === 'together' ? 'together' : currentUser;
-                            localStorage.setItem(`${kUser}_${dayIndex}_${programKey}_${index}_set${i}`, "false");
+                            localStorage.setItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`, "false");
                             if (useCloud && window.cloudSync && window.cloudSync.enabled) {
                                 const key = `${dayIndex}_${programKey}_${index}_set${i}`;
-                                const target = currentUser === 'together' ? 'together' : currentUser;
-                                window.cloudSync.setSet(target, key, false);
-                            }
-                            // Birlikte modunda Çağlar ve Enes profillerinden de kaldır
-                            if (currentUser === 'together') {
-                                ['caglar','enes'].forEach(u => {
-                                    localStorage.setItem(`${u}_${dayIndex}_${programKey}_${index}_set${i}`, "false");
-                                    if (useCloud && window.cloudSync && window.cloudSync.enabled) {
-                                        const key = `${dayIndex}_${programKey}_${index}_set${i}`;
-                                        window.cloudSync.setSet(u, key, false);
-                                    }
-                                });
+                                window.cloudSync.setSet(currentUser, key, false);
                             }
                         }
                         updateProgress(dayIndex, programKey);
@@ -2212,6 +1943,52 @@ const programs = {
 showProgram(parseInt(daySelect.value));
         daySelect.addEventListener("change", () => {
             showProgram(parseInt(daySelect.value));
+        });
+
+        // Alt kısımda 5 sn bekleyince sıfırlama butonunu göster
+        let bottomHoldTimer = null;
+        let bottomHoldActive = false;
+        let bottomAutoHideTimer = null;
+        function isAtBottom() {
+            const threshold = 6;
+            return window.innerHeight + window.scrollY >= (document.body.offsetHeight - threshold);
+        }
+        function startBottomHold() {
+            if (bottomHoldActive || bottomHoldTimer) return;
+            bottomHoldTimer = setTimeout(() => {
+                bottomHoldActive = true;
+                const btn = document.getElementById('bottomResetBtn');
+                if (btn) btn.style.display = 'block';
+                // Otomatik gizleme (7 sn sonra)
+                if (bottomAutoHideTimer) clearTimeout(bottomAutoHideTimer);
+                bottomAutoHideTimer = setTimeout(() => {
+                    hideBottomReset();
+                }, 7000);
+            }, 5000);
+        }
+        function cancelBottomHold() {
+            if (bottomHoldTimer) {
+                clearTimeout(bottomHoldTimer);
+                bottomHoldTimer = null;
+            }
+        }
+        function hideBottomReset() {
+            const btn = document.getElementById('bottomResetBtn');
+            if (btn) btn.style.display = 'none';
+            bottomHoldActive = false;
+            if (bottomAutoHideTimer) {
+                clearTimeout(bottomAutoHideTimer);
+                bottomAutoHideTimer = null;
+            }
+        }
+        window.addEventListener('scroll', () => {
+            if (!isAtBottom()) {
+                // Alt bölgeden uzaklaşınca hemen gizle
+                hideBottomReset();
+                cancelBottomHold();
+                return;
+            }
+            if (!bottomHoldActive) startBottomHold();
         });
 </script>
 
