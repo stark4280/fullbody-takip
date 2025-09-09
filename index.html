@@ -146,6 +146,8 @@ body {
             color: var(--user-color);
             filter: drop-shadow(0 0 6px rgba(250,204,21,0.35));
         }
+        html[data-theme="joker"] .header h1::after { content: ' 🃏'; color: var(--user-color); filter: drop-shadow(0 0 6px rgba(34,197,94,0.35)); }
+        html[data-theme="joker"] .program-title::before { content: '🃏'; }
 
         .user-selector {
             display: flex;
@@ -254,10 +256,8 @@ body {
 
         /* Guide (Rehber) */
         .guide-section { display: none; padding: 30px 20px; background: #0b0f1a; border: 1px solid #1f2937; border-radius: 12px; }
-        .guide-grid { display: none !important; }
         .guide-card { background: #0f172a; border: 1px solid #1f2937; border-radius: 12px; padding: 16px; cursor: default; color: var(--text); margin-bottom: 12px; box-shadow: inset 0 0 0 1px rgba(250,204,21,0.03); }
         .guide-card h3 { color: var(--user-color); margin-bottom: 8px; font-size: 1.1rem; text-shadow: 0 0 8px rgba(250,204,21,0.15); }
-        .accordion { display: none; }
         .guide-card ul, .guide-card p { margin-left: 0; }
         .guide-card h4 { margin: 8px 0; color: #e5e7eb; font-size: 1rem; }
         .guide-card ul { margin: 6px 0 10px 18px; }
@@ -276,7 +276,7 @@ body {
         .rank-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
         .rank-card { background: #0b0f1a; border: 1px solid #1f2937; border-radius: 12px; padding: 12px; box-shadow: inset 0 0 0 1px rgba(250,204,21,0.03); }
         .rank-title { color: var(--user-color); font-weight: 800; margin-bottom: 8px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: .5px; }
-        .rank-chip { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #111827; background: #facc15; border: 1px solid #facc15; border-radius: 8px; padding: 6px 8px; font-size: 0.9rem; font-weight: 800; }
+        .rank-chip { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #111827; background: var(--user-color); border: 1px solid var(--user-color); border-radius: 8px; padding: 6px 8px; font-size: 0.9rem; font-weight: 800; }
         .rank-chip span:first-child { text-transform: none; }
         .rank-chip:hover { box-shadow: 0 0 0 3px rgba(250,204,21,0.15); }
         @media (max-width: 420px) { .rank-grid { grid-template-columns: 1fr; } }
@@ -310,13 +310,13 @@ body {
         .program-title {
             font-size: 2rem;
             font-weight: 800;
-            color: #facc15;
+            color: var(--user-color);
     margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            text-shadow: 0 0 10px rgba(250,204,21,0.25);
+            text-shadow: 0 0 10px currentColor;
         }
 
         .program-title::before {
@@ -337,7 +337,7 @@ body {
 
         .warmup {
             background: #111827;
-            color: #facc15;
+            color: var(--user-color);
             border: 1px solid #1f2937;
             border-radius: 12px;
             padding: 12px 14px;
@@ -365,7 +365,7 @@ body {
 
         .progress-bar {
             height: 100%;
-            background: #facc15;
+            background: var(--user-color);
             width: 0%;
             transition: width 0.4s ease;
             border-radius: 12px;
@@ -463,11 +463,11 @@ body {
         .set-checkbox {
             width: 38px;
             height: 38px;
-            border: 2px solid var(--user-color);
+            border: 2px solid #374151;
             border-radius: 6px;
             cursor: pointer;
             position: relative;
-            background: #111827;
+            background: #0b0f1a;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
@@ -475,28 +475,18 @@ body {
             font-size: 16px;
             font-weight: bold;
             color: var(--user-color);
+            accent-color: var(--user-color);
         }
 
         .set-checkbox:hover {
             transform: scale(1.03);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
         }
 
         .set-checkbox:checked {
-            background: var(--user-color);
-            color: #111827;
-            transform: scale(1.03);
-        }
-
-        .set-checkbox:checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
+            background: #0b0f1a;
+            color: var(--user-color);
+            border-color: var(--user-color);
         }
 
         .set-label {
@@ -1450,8 +1440,8 @@ const programs = {
         // Kullanıcı sistemi
         let currentUser = 'caglar';
         const users = {
-            caglar: { name: 'Çağlar', color: '#667eea' },
-            enes: { name: 'Enes', color: '#ff6b6b' }
+            caglar: { name: 'Çağlar', color: '#facc15', theme: 'batman' },
+            enes: { name: 'Enes (Joker)', color: '#22c55e', theme: 'joker' }
         };
         
         const daySelect = document.getElementById("daySelect");
@@ -1533,6 +1523,12 @@ const programs = {
         function updateUserTheme() {
             const user = users[currentUser];
             document.documentElement.style.setProperty('--user-color', user.color);
+            // Joker/Batman ikonları için tema bayrağı
+            if (user.theme === 'joker') {
+                document.documentElement.setAttribute('data-theme', 'joker');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
             
             // Progress bar rengini güncelle
             // Renkleri CSS değişkenleriyle güncelle
@@ -1540,32 +1536,26 @@ const programs = {
             document.documentElement.style.setProperty('--footer-h3-color', user.color);
             document.documentElement.style.setProperty('--footer-h4-color', `${user.color}88`);
 
-            // Kullanıcı adını güncelle
+            // Başlık metni (tema başlığı)
             const header = document.getElementById('userHeader');
             if (header) {
-                header.textContent = `${user.name}`;
+                header.textContent = (user.theme === 'joker') ? 'JOKER' : 'BATMAN';
             }
             const badge = document.getElementById('syncBadge');
             if (badge) badge.style.borderColor = '#1f2937';
 
-            // Exercise modal renkleri sabit nötr temaya çekildi
+            // Kullanıcı buton etiketlerine emoji
+            const userBtns = document.querySelectorAll('.user-btn');
+            userBtns.forEach(btn => {
+                const u = users[btn.dataset.user];
+                if (!u) return;
+                const label = (u.theme === 'joker') ? `${u.name} 🃏` : `${u.name} 🦇`;
+                btn.textContent = label;
+            });
 
-            // Set checkbox renklerini güncelle
+            // Set/Exercise renkleri (değişmedi)
             document.documentElement.style.setProperty('--set-checkbox-color', user.color);
-
-            // Exercise item border renklerini güncelle
             document.documentElement.style.setProperty('--exercise-item-border-color', user.color);
-
-            // Set checkbox renklerini güncelle
-            document.documentElement.style.setProperty('--set-checkbox-color', user.color);
-
-            // Exercise item border renklerini güncelle
-            document.documentElement.style.setProperty('--exercise-item-border-color', user.color);
-
-            // Exercise item border renklerini güncelleyeyim
-            document.documentElement.style.setProperty('--exercise-item-border-color', user.color);
-
-            // PR input border renklerini güncelle
             const prInputs = document.querySelectorAll('.pr-input');
             prInputs.forEach(input => {
                 input.style.borderColor = user.color;
@@ -1690,7 +1680,9 @@ const programs = {
 // Program gösterme
         function showProgram(dayIndex) {
             const programKey = getProgramForDay(dayIndex);
-            programTitle.innerText = `${dayNames[dayIndex]}`;
+            const currentTheme = (users[currentUser] && users[currentUser].theme) ? users[currentUser].theme : 'batman';
+            const brand = currentTheme === 'joker' ? 'Joker' : 'Batman';
+            programTitle.innerText = `${brand} Full Body – ${dayNames[dayIndex]}`;
             programList.innerHTML = "";
             
             const todayData = programs[programKey];
@@ -2268,7 +2260,9 @@ const programs = {
                 // Program gösterme fonksiyonunu güncelle
         function showProgram(dayIndex) {
             const programKey = getProgramForDay(dayIndex);
-            programTitle.innerText = `Batman Full Body – ${dayNames[dayIndex]}`;
+            const currentTheme = (users[currentUser] && users[currentUser].theme) ? users[currentUser].theme : 'batman';
+            const brand = currentTheme === 'joker' ? 'Joker' : 'Batman';
+            programTitle.innerText = `${brand} Full Body – ${dayNames[dayIndex]}`;
             programList.innerHTML = "";
             
             const todayData = programs[programKey];
