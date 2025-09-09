@@ -1715,6 +1715,9 @@ const programs = {
                     `;
                 }
                 const prKey = getPRKey(programKey, item.name);
+                const nameSlugForUnit = slugify(item.name);
+                const groupForUnit = getGroupForExercise(nameSlugForUnit) || '';
+                const unitLabel = (groupForUnit === 'plank') ? 'sn' : 'kg';
                 li.innerHTML = `
                     <div class="exercise-content">
                         <div class="exercise-details">
@@ -1722,10 +1725,10 @@ const programs = {
                             <div class="exercise-rest">${item.rest}</div>
                             <div class="level-badge" id="rankBadge${index}"></div>
                             <div class="exercise-pr">
-                                <input type="number" class="pr-input" placeholder="PR (kg)" 
+                                <input type="number" class="pr-input" placeholder="PR (${unitLabel})" 
                                        value="${localStorage.getItem(prKey) || ''}"
                                        onchange="updatePR('${prKey}', this.value)">
-                                <span class="pr-label">Personal Record (kg)</span>
+                                <span class="pr-label">Personal Record (${unitLabel})</span>
                             </div>
                             <div class="exercise-sets">
                                 ${setCheckboxes}
@@ -2025,7 +2028,8 @@ const programs = {
                     if (nextLabel && nextTarget != null) {
                         const remain = Math.max(0, nextTarget - num);
                         const nextTr = rankTrMap[nextLabel] ? ` (${rankTrMap[nextLabel]})` : '';
-                        sub.textContent = `${nextLabel}${nextTr} için ${remain} kg kaldı`;
+                        const unit = (group === 'plank' || group === 'sidePlank') ? 'sn' : 'kg';
+                        sub.textContent = `${nextLabel}${nextTr} için ${remain} ${unit} kaldı`;
                     } else {
                         sub.textContent = '';
                     }
@@ -2289,6 +2293,9 @@ const programs = {
                     `;
                 }
                 const prKey = getPRKey(programKey, item.name);
+                const nameSlugForUnit = slugify(item.name);
+                const groupForUnit = getGroupForExercise(nameSlugForUnit) || '';
+                const unitLabel = (groupForUnit === 'plank') ? 'sn' : 'kg';
                 li.innerHTML = `
                     <div class="exercise-content">
                         <div class="exercise-details">
@@ -2296,10 +2303,10 @@ const programs = {
                             <div class="exercise-rest">${item.rest}</div>
                             <div class="level-badge" id="rankBadge${index}"></div>
                             <div class="exercise-pr">
-                                <input type="number" class="pr-input" placeholder="PR (kg)" 
+                                <input type="number" class="pr-input" placeholder="PR (${unitLabel})" 
                                        value="${localStorage.getItem(prKey) || ''}"
                                        onchange="updatePR('${prKey}', this.value)">
-                                <span class="pr-label">Personal Record (kg)</span>
+                                <span class="pr-label">Personal Record (${unitLabel})</span>
                             </div>
                             <div class="exercise-sets">
                                 ${setCheckboxes}
