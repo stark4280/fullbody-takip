@@ -1,139 +1,79 @@
-# 💪 Fitness Tracker Pro
+# 💪 Batman Full Body — PWA Antrenman Takipçisi
 
-**Arkadaşlarla birlikte antrenman yapın ve fitness hedeflerinize ulaşın!**
+Minimal ve mobil-öncelikli tam vücut antrenman takipçisi. Pzt/Çrş/Cuma program akışı, egzersiz başına PR girme, egzersiz bazlı Rank (Rookie → Dark Knight), TR rehber ve offline çalışma.
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?style=for-the-badge)](https://stark4280.github.io/siteantrenman/)
-[![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red.svg?style=for-the-badge)](https://github.com/stark4280/siteantrenman)
+[![PWA](https://img.shields.io/badge/PWA-Installable-5a29e4?style=for-the-badge)](#) [![Mobile First](https://img.shields.io/badge/Mobile-First-0ea5e9?style=for-the-badge)](#)
 
-## 🚀 Özellikler
+## 🚀 Öne Çıkanlar
 
-### 🏋️ **Set Bazlı Takip Sistemi**
-- Her egzersiz için ayrı set checkbox'ları
-- Otomatik set sayısı algılama (4x10-12 → 4 checkbox)
-- Set bazlı ilerleme ve haftalık hedef (Pzt-Çrş-Cuma tamamlanınca sıfırlama teklifi)
-- LocalStorage + Firestore (bulut senkron)
+- 🗓️ Sabit program: Pazartesi (Kuvvet), Çarşamba (Posterior Chain + Core), Cuma (Volüm & Detay)
+- ✅ Set bazlı takip: Her egzersiz için set checkbox’ları ve ilerleme barı
+- ⏱️ Akıllı dinlenme: Son setten sonra otomatik daha uzun dinlenme, titreşim uyarısı
+- 🏷️ PR ve Rank: Her egzersizde PR girişi; rozet ile seviye (Rookie → Dark Knight) + “bir sonraki seviyeye x kg”
+- 👁️ Açılışta rank görünümü: Sayfa açılır açılmaz egzersiz rozetleri hesaplanır (PR girmeden Rookie görünür)
+- 📚 Rehber (TR): Arama, mobil okunaklı paragraf akışı, ana ve aksesuar hareketler için rank-chip grid’leri
+- 📦 Offline/PWA: Service worker cache; ana ekrana ekle
+- ☁️ İsteğe bağlı bulut senkron: Firestore (anonim oturum)
 
-### ⏰ **Akıllı Dinlenme Timer'ı**
-- Set tamamlandığında otomatik başlar
-- Son set sonrası egzersiz arası daha uzun dinlenme
-- Arka planda çalışmaya devam eder (ses yok, sadece vibrasyon)
-- Progress bar ile görsel geri bildirim
+## 📅 Haftalık Program (Özet)
 
-### 📱 **Mobil Optimizasyon**
-- Responsive, dokunma dostu arayüz
-- PWA (Ana ekrana ekle banner’ı – Android prompt, iOS yönerge)
-- Offline çalışma (service worker önbelleği)
+- Pazartesi — Back Squat, Bench Press, Row, DB OHP, Face Pull, Plank, Wrist Curl
+- Çarşamba — Deadlift, Lat Pulldown, Incline DB Press, Leg Curl, Hip Thrust, Side Plank, Reverse Wrist Curl
+- Cuma — Front/Goblet Squat, OHP, Romanian Deadlift, Seated Row, Lateral Raise, Hanging Knee Raise, Wrist Roller
 
-### 🎯 **Egzersiz Detayları**
-- Uzun basınca (0.5 sn) açılır
-- Detaylı nasıl yapılır açıklamaları
-- Kas grupları ve Türkçe+İngilizce karşılıklar
-- Önemli ipuçları ve güvenlik uyarıları
+## 🏷️ Rank (Seviye) Sistemi — Ana Hareketler
 
-## 🎨 **Tasarım Özellikleri**
+- Bench: 40×5 → 60×5 → 80×5 → 100×5 → 120×5 → 140×5
+- Squat: 60×5 → 80×5 → 100×5 → 140×5 → 160×5 → 180×5
+- Deadlift: 80×5 → 100×5 → 140×5 → 180×5 → 200×5 → 220×5
+- OHP: 25×5 → 35×5 → 45×5 → 55×5 → 65×5 → 75×5
+- Row: 40×5 → 60×5 → 80×5 → 100×5 → 120×5 → 140×5
+- Lat Pulldown: 40×8 → 60×8 → 80×8 → 100×8 → 120×8 → 140×8
 
-- **Minimal siyah-gri** tema, yüksek kontrast
-- Net tipografi (Inter + JetBrains Mono zamanlayıcı)
-- Daha geniş dokunma hedefleri ve ferah boşluklar
+> Aksesuarlar için de eşikler eklenmiştir (incline DB, front/goblet, RDL, leg curl, hip thrust, DB OHP, lateral raise, face pull, seated row, core/grip) ve rehberde chip olarak listelenir.
 
-## 📱 **Kullanım**
+## 📚 Rehber (TR)
 
-### 1. **Program Seçimi**
-- ABA veya BAB düzeni seçin
-- Antrenman gününü belirleyin
+- Arama: “bench, uyku, protein” gibi anahtarlarla içerik filtreleme
+- İçerik başlıkları: Programın Amacı, Haftalık Program, Rank Özetleri, Aksesuar Eşikleri (chip grid), Uygulama Adımları, 12 Haftalık Periyodizasyon, SSS & Güvenlik
 
-### 2. **Set Takibi**
-- Egzersizi tamamlayın
-- İlgili set checkbox'ını işaretleyin
-- Timer otomatik başlar
+## 📱 Kullanım
 
-### 3. **Egzersiz Detayları**
-- Egzersize kısa süre (0.5 sn) basılı tutun
-- Detaylı açıklamaları okuyun
-- Kas gruplarını öğrenin
+1) Üstten “Program / Rehber” arasında geçiş yapın
 
-### 4. **Dinlenme Timer'ı**
-- Timer arka planda çalışır
-- Bittiğinde vibrasyon bildirimi
-- İsterseniz iptal edebilirsiniz
+2) Gün seçin (Pazartesi/Çarşamba/Cuma) ve egzersiz setlerini işaretleyin (başlık sadece gün adını gösterir)
 
-## 🛠️ **Teknik Detaylar**
+3) PR değerinizi egzersiz kartındaki alanlara girin; rank rozetleri ve “sonraki seviyeye x kg” otomatik güncellenir (PR olmadan Rookie görünür)
 
-- **Vanilla JavaScript**, **HTML5**, **CSS3**
-- **LocalStorage** + **Firestore** (anonim oturum, bulut senkron)
-- **Web APIs** – Vibrasyon
-- **PWA** – manifest + service worker, A2HS banner
+4) Dinlenme süresi bitince titreşim uyarısı gelir; isterseniz iptal edin
 
-## 🚀 **GitHub Pages'de Yayınlama**
+5) Offline/PWA: Ana ekrana ekleyin ve internet olmadan da kullanın
 
-### 1. **Repository Ayarları**
+## 🛠️ Teknik
+
+- Vanilla JS + HTML + CSS (framework yok)
+- LocalStorage (offline veri), Firestore (opsiyonel bulut)
+- PWA: `manifest.webmanifest`, `sw.js` (network-first HTML, cache-first varlıklar)
+
+## 🔧 Geliştirme
+
 ```bash
-# Repository'yi klonlayın
-git clone https://github.com/stark4280/siteantrenman.git
-cd siteantrenman
-
-# GitHub Pages'i aktif edin
-# Settings > Pages > Source: Deploy from a branch
-# Branch: main, Folder: / (root)
+git clone <repo>
+cd <repo>
+# Geliştirme için herhangi bir statik sunucu ile açın (ör. VS Code Live Server)
 ```
 
-### 2. **Deploy**
-```bash
-# Değişiklikleri commit edin
-git add .
-git commit -m "🚀 Initial release"
-git push origin main
-
-# GitHub Pages otomatik deploy eder
-# https://stark4280.github.io/siteantrenman/
-```
-
-## 📁 **Dosya Yapısı**
+## 📁 Yapı
 
 ```
-siteantrenman/
-├── index.html          # Ana sayfa
-├── README.md           # Bu dosya
-├── .gitignore          # Git ignore
-├── sw.js               # Service worker (PWA)
-├── manifest.webmanifest# PWA manifest
-└── icons/              # PWA ikonları (ekleyin)
-    ├── icon-192.png
-    ├── icon-512.png
-    └── maskable-512.png
+fullbody-takip-main/
+├── index.html
+├── README.md
+├── sw.js
+├── manifest.webmanifest
+└── icons/
 ```
 
-## 🎯 **Gelecek Özellikler**
+## 📄 Lisans
 
-- [ ] Haftalık/aylık istatistikler ve grafikler
-- [ ] Hedef belirleme
-- [ ] Push bildirimleri (isteğe bağlı)
-
-## 🤝 **Katkıda Bulunma**
-
-1. Fork yapın
-2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
-3. Commit yapın (`git commit -m 'Add some AmazingFeature'`)
-4. Push yapın (`git push origin feature/AmazingFeature`)
-5. Pull Request açın
-
-## 📄 **Lisans**
-
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
-
-## 🙏 **Teşekkürler**
-
-- **Fitness topluluğu** - İlham ve geri bildirim için
-- **GitHub** - Ücretsiz hosting için
-- **Modern web teknolojileri** - Güçlü araçlar için
-
-## 📞 **İletişim**
-
-- **GitHub**: [@stark4280](https://github.com/stark4280)
-- **Proje**: [Fitness Tracker](https://github.com/stark4280/siteantrenman)
-
----
-
-⭐ **Bu projeyi beğendiyseniz yıldız vermeyi unutmayın!** ⭐
-
-**Made with ❤️ for fitness enthusiasts**
+MIT

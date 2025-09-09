@@ -13,15 +13,15 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yourusername.github.io/siteantrenman/">
-    <meta property="og:title" content="💪 Fitness Tracker Pro">
-    <meta property="og:description" content="Arkadaşlarla birlikte antrenman yapın! Set bazlı takip ve dinlenme timer'ı ile fitness hedeflerinize ulaşın.">
+    <meta property="og:title" content="BATMAN Full Body">
+    <meta property="og:description" content="Batman temalı 3 gün tam vücut programı, PR ve rank sistemi, PWA.">
     <meta property="og:image" content="https://yourusername.github.io/siteantrenman/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://yourusername.github.io/siteantrenman/">
-    <meta property="twitter:title" content="💪 Fitness Tracker Pro">
-    <meta property="twitter:description" content="Arkadaşlarla birlikte antrenman yapın! Set bazlı takip ve dinlenme timer'ı ile fitness hedeflerinize ulaşın.">
+    <meta property="twitter:title" content="BATMAN Full Body">
+    <meta property="twitter:description" content="Batman temalı 3 gün tam vücut programı, PR ve rank sistemi, PWA.">
     <meta property="twitter:image" content="https://yourusername.github.io/siteantrenman/og-image.png">
 
     <!-- PWA -->
@@ -54,7 +54,7 @@
 <style>
         :root {
             --user-color: #facc15; /* yellow accent */
-            --text: #0f172a; /* near black */
+            --text: #e5e7eb; /* light text on dark */
             --muted: #374151; /* gray-700 */
             --border: #e5e7eb; /* gray-200 */
             --bg: #f7f8fa; /* light gray */
@@ -246,16 +246,52 @@ body {
         .toggle-btn.active { background: var(--user-color); color: #111827; border-color: var(--user-color); }
 
         /* Guide (Rehber) */
-        .guide-section { display: none; padding: 30px 20px; }
-        .guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-        .guide-card { background: #0f172a; border: 1px solid #1f2937; border-radius: 12px; padding: 16px; cursor: pointer; color: var(--text); }
+        .guide-section { display: none; padding: 30px 20px; background: #0b0f1a; border: 1px solid #1f2937; border-radius: 12px; }
+        .guide-grid { display: none !important; }
+        .guide-card { background: #0f172a; border: 1px solid #1f2937; border-radius: 12px; padding: 16px; cursor: default; color: var(--text); margin-bottom: 12px; }
         .guide-card h3 { color: var(--user-color); margin-bottom: 8px; font-size: 1.1rem; }
-        .accordion { margin-top: 10px; display: none; color: #cbd5e1; }
-        .guide-card.open .accordion { display: block; }
-        .guide-card ul, .guide-card p { margin-left: 16px; }
+        .accordion { display: none; }
+        .guide-card ul, .guide-card p { margin-left: 0; }
+        .guide-card h4 { margin: 8px 0; color: #e5e7eb; font-size: 1rem; }
+        .guide-card ul { margin: 6px 0 10px 18px; }
 
         /* Level badge */
-        .level-badge { margin: 8px auto 0 auto; display: inline-block; background: #111827; border: 1px solid #1f2937; color: var(--user-color); padding: 6px 10px; border-radius: 999px; font-weight: 800; letter-spacing: .3px; }
+        .level-badge { margin: 6px 0; display: inline-block; background: #111827; border: 1px solid #1f2937; color: var(--user-color); padding: 6px 10px; border-radius: 999px; font-weight: 800; letter-spacing: .3px; }
+        .rank-sub { font-size: 12px; color: #cbd5e1; margin: 2px 0 6px 0; }
+
+        /* Guide toolbar */
+        .guide-toolbar { display: flex; gap: 10px; justify-content: center; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+        .guide-search { padding: 10px 12px; border: 1px solid #1f2937; border-radius: 10px; background: #0b0f1a; color: var(--text); min-width: 260px; }
+        .lang-btn { background: #0f172a; color: #cbd5e1; border: 1px solid #1f2937; padding: 8px 12px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+        .lang-btn.active { background: var(--user-color); color: #111827; border-color: var(--user-color); }
+
+        /* Rank cards (mobile-first) */
+        .rank-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+        .rank-card { background: #0b0f1a; border: 1px solid #1f2937; border-radius: 12px; padding: 12px; }
+        .rank-title { color: var(--user-color); font-weight: 800; margin-bottom: 8px; font-size: 0.95rem; }
+        .rank-chip { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #e5e7eb; background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 6px 8px; font-size: 0.9rem; }
+        @media (max-width: 420px) { .rank-grid { grid-template-columns: 1fr; } }
+
+        /* Guide article (paragraph-first, mobile friendly) */
+        .guide-article { color: var(--text); line-height: 1.7; }
+        .guide-article h3 { color: var(--user-color); margin: 10px 0 6px 0; font-size: 1.1rem; }
+        .guide-article h4 { color: #e5e7eb; margin: 8px 0 6px 0; font-size: 1rem; }
+        .guide-article p { margin: 6px 0; color: #e5e7eb; }
+        .guide-article ul { margin: 6px 0 10px 18px; }
+        .guide-article li { color: #e5e7eb; }
+
+        /* Per-exercise PR success badge */
+        .pr-badge {
+            background: #111827;
+            color: var(--user-color);
+            border: 1px solid #1f2937;
+            border-radius: 10px;
+            padding: 6px 10px;
+            display: inline-block;
+            font-weight: 700;
+            width: fit-content;
+            margin: 0 0 6px 0;
+        }
 
         .program-header {
             text-align: center;
@@ -307,20 +343,22 @@ body {
         }
 
         .progress-container {
-            background: #f1f5f9;
+            background: #111827;
+            border: 1px solid #1f2937;
             border-radius: 12px;
             overflow: hidden;
-            height: 14px;
+            height: 18px;
             position: relative;
         }
 
         .progress-bar {
             height: 100%;
-            background: var(--user-color);
+            background: #facc15;
             width: 0%;
             transition: width 0.4s ease;
             border-radius: 12px;
             position: relative;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
         }
 
         
@@ -451,7 +489,7 @@ body {
 
         .set-label {
             font-size: 1rem;
-            color: #374151;
+            color: #e5e7eb;
             margin-top: 10px;
             text-align: center;
             font-weight: 700;
@@ -974,6 +1012,11 @@ body {
                 font-size: 1.5rem;
             }
         }
+
+        .toggle-btn:focus-visible, .user-btn:focus-visible, .set-checkbox:focus-visible, .btn:focus-visible, .guide-search:focus-visible {
+            outline: 2px solid var(--user-color);
+            outline-offset: 2px;
+        }
 </style>
 </head>
 <body>
@@ -997,6 +1040,10 @@ body {
                 </div>
             </div>
         </div>
+        <div class="view-toggle" style="margin-top:10px;">
+            <button id="btnProgram" class="toggle-btn active">Program</button>
+            <button id="btnGuide" class="toggle-btn">Rehber</button>
+        </div>
 
         <div class="program-section">
             <div class="program-header">
@@ -1011,6 +1058,207 @@ body {
             </div>
 
             <ul class="exercise-list" id="programList"></ul>
+        </div>
+        <div class="guide-section" id="guideSection">
+            <div class="guide-toolbar">
+                <input id="guideSearch" class="guide-search" placeholder="Rehberde ara (örn. bench, uyku, protein)" aria-label="Rehberde ara">
+             </div>
+            <div class="guide-article" id="guideArticle">
+                <section data-kb="purpose">
+                    <h3 id="gaPurposeTitle">🎯 Programın Amacı</h3>
+                    <p id="gaPurposeIntro">Bu program aynı anda temel kuvvet, kas kütlesi ve posterior chain/core gelişimini hedefler. Omuz sağlığı ve sakatlık önleme prensipleriyle balanslıdır.</p>
+                    <ul>
+                        <li>Temel kuvvet (Squat, Bench, Deadlift, OHP)</li>
+                        <li>Yeterli hacim ile hipertrofi</li>
+                        <li>Core ve omuz stabilitesi</li>
+                        <li>Haftada 3 gün, minimum 12 hafta</li>
+                    </ul>
+                </section>
+                <section data-kb="weekly">
+                    <h3 id="gaWeeklyTitle">📅 Haftalık Program</h3>
+                    <p id="gaWeeklyMon"><strong>Pazartesi — Kuvvet:</strong> Back Squat 4×6–8, Bench 4×6–8, Row 4×8–10, DB OHP 3×10, Face Pull 3×12–15, Plank 3×max, Wrist Curl 3×15–20.</p>
+                    <p id="gaWeeklyWed"><strong>Çarşamba — Posterior Chain + Core:</strong> Deadlift 4×5, Lat Pulldown 4×10, Incline DB 4×10, Leg Curl 3×12, Hip Thrust 3×12, Side Plank 3×, Reverse Wrist Curl 3×15–20.</p>
+                    <p id="gaWeeklyFri"><strong>Cuma — Volüm & Detay:</strong> Front/Goblet Squat 4×10, OHP 4×8–10, RDL 4×10, Seated Row 4×10–12, Lateral Raise 3×12–15, HKR 3×12–15, Wrist Roller 3 tur.</p>
+                </section>
+                <section data-kb="ranks">
+                    <h3 id="gaRanksTitle">📊 Rank (Seviye) — Ana Hareketler</h3>
+                    <p id="gaRanksIntro">5× tekrar (lat için 8×) eşiği ile seviyeni takip et. Aşağıda her ana hareket için hedefler listelenmiştir.</p>
+                    <div class="rank-grid">
+                        <div class="rank-card">
+                            <div class="rank-title">Bench Press</div>
+                            <div class="rank-chip"><span>Rookie (Acemi)</span><span>40×8</span></div>
+                            <div class="rank-chip"><span>Apprentice (Çırak)</span><span>60×8</span></div>
+                            <div class="rank-chip"><span>Warrior (Savaşçı)</span><span>80×8</span></div>
+                            <div class="rank-chip"><span>Protector (Koruyucu)</span><span>100×8</span></div>
+                            <div class="rank-chip"><span>Knight (Şövalye)</span><span>120×8</span></div>
+                            <div class="rank-chip"><span>Dark Knight (Kara Şövalye)</span><span>140×8</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Back Squat</div>
+                            <div class="rank-chip"><span>Rookie</span><span>60×5</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>80×5</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>100×5</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>140×5</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>160×5</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>180×5</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Deadlift</div>
+                            <div class="rank-chip"><span>Rookie</span><span>80×5</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>100×5</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>140×5</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>180×5</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>200×5</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>220×5</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Overhead Press</div>
+                            <div class="rank-chip"><span>Rookie</span><span>25×5</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>35×5</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>45×5</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>55×5</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>65×5</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>75×5</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Barbell Row</div>
+                            <div class="rank-chip"><span>Rookie</span><span>40×5</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>60×5</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>80×5</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>100×5</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>120×5</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>140×5</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Lat Pulldown</div>
+                            <div class="rank-chip"><span>Rookie</span><span>40×8</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>60×8</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>80×8</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>100×8</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>120×8</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>140×8</span></div>
+                        </div>
+                    </div>
+                </section>
+                <section data-kb="accessory">
+                    <h3 id="gaAccessoryTitle">🧩 Aksesuar Eşikleri</h3>
+                    <div class="rank-grid">
+                        <div class="rank-card">
+                            <div class="rank-title">Incline DB (her elde)</div>
+                            <div class="rank-chip"><span>Rookie (Acemi)</span><span>2×15</span></div>
+                            <div class="rank-chip"><span>Apprentice (Çırak)</span><span>2×20</span></div>
+                            <div class="rank-chip"><span>Warrior (Savaşçı)</span><span>2×30</span></div>
+                            <div class="rank-chip"><span>Protector (Koruyucu)</span><span>2×35</span></div>
+                            <div class="rank-chip"><span>Knight (Şövalye)</span><span>2×40</span></div>
+                            <div class="rank-chip"><span>Dark Knight (Kara Şövalye)</span><span>2×50</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Front/Goblet Squat</div>
+                            <div class="rank-chip"><span>Rookie</span><span>40</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>60</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>80</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>100</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>120</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>140</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Romanian Deadlift (RDL)</div>
+                            <div class="rank-chip"><span>Rookie</span><span>60</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>80</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>100</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>140</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>160</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>180</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Leg Curl (machine)</div>
+                            <div class="rank-chip"><span>Rookie</span><span>30</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>40</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>50</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>60</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>70</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>80</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Barbell Hip Thrust</div>
+                            <div class="rank-chip"><span>Rookie</span><span>60</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>80</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>120</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>160</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>180</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>200</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">DB Overhead Press (her elde)</div>
+                            <div class="rank-chip"><span>Rookie</span><span>2×12</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>2×16</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>2×22</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>2×26</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>2×30</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>2×36</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Dumbbell Lateral Raise</div>
+                            <div class="rank-chip"><span>Rookie</span><span>6–8</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>8–10</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>12–14</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>16–18</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>20–22</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>24–26</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Face Pull (kablo)</div>
+                            <div class="rank-chip"><span>Rookie</span><span>20</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>30</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>40</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>50</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>60</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>70</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Seated Cable Row</div>
+                            <div class="rank-chip"><span>Rookie</span><span>40</span></div>
+                            <div class="rank-chip"><span>Apprentice</span><span>60</span></div>
+                            <div class="rank-chip"><span>Warrior</span><span>80</span></div>
+                            <div class="rank-chip"><span>Protector</span><span>100</span></div>
+                            <div class="rank-chip"><span>Knight</span><span>120</span></div>
+                            <div class="rank-chip"><span>Dark Knight</span><span>140</span></div>
+                        </div>
+                        <div class="rank-card">
+                            <div class="rank-title">Core & Grip</div>
+                            <div class="rank-chip"><span>Plank</span><span>30 → 180 sn</span></div>
+                            <div class="rank-chip"><span>HKR</span><span>BW → BW+20</span></div>
+                            <div class="rank-chip"><span>Wrist Curl</span><span>10 → 40+</span></div>
+                            <div class="rank-chip"><span>Wrist Roller</span><span>5 → 20</span></div>
+                        </div>
+                    </div>
+                </section>
+                <section data-kb="howto">
+                    <h3 id="gaHowToTitle">🔧 Uygulama — Adım Adım</h3>
+                    <ul>
+                        <li>Isınma: 5–10 dk kardiyo + dinamik mobilite; ana hareket için 2–3 hazırlık seti</li>
+                        <li>Set/Tekrar: Aralıkta kal; kolaysa ağırlığı %2.5–5 artır</li>
+                        <li>Dinlenme: Compound 2–4 dk; izolasyon 60–90 sn</li>
+                        <li>Form: Bozulursa ağırlığı azalt; spotter/güvenlik ekipmanı kullan</li>
+                    </ul>
+                </section>
+                <section data-kb="periodization">
+                    <h3 id="gaPeriodTitle">📈 12 Haftalık Periyodizasyon</h3>
+                    <ul>
+                        <li>1–4: Adaptasyon (teknik + hacim)</li>
+                        <li>5–8: İlerleme (ağırlık/tekrar artışı)</li>
+                        <li>9–11: Yoğunlaşma (4–6 tekrar)</li>
+                        <li>12: Deload (hacmi %40–60 düşür)</li>
+                    </ul>
+                </section>
+                <section data-kb="faq">
+                    <h3 id="gaFAQTitle">❓ SSS & Güvenlik</h3>
+                    <ul>
+                        <li>En az 12 hafta; haftada 1–3 kardiyo</li>
+                        <li>Uyku 7–9 saat; protein 1.6–2.2 g/kg</li>
+                        <li>Ağrı varsa dur ve profesyonele danış</li>
+                    </ul>
+                </section>
 </div>
 </div>
 
@@ -1089,7 +1337,7 @@ body {
 <!-- Alt Bekleme ile Açılan Sıfırlama Butonu -->
 <div id="bottomResetBtn" style="display:none; position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px; z-index: 1005;">
     <button class="btn btn-secondary" onclick="hideBottomReset();openWeekModal()">Haftayı Sıfırla</button>
-    </div>
+</div>
 
 <!-- Firebase Cloud Sync (Firestore) -->
 <script type="module">
@@ -1257,11 +1505,17 @@ const programs = {
                     window.cloudSync.setPR(currentUser, prKey, null);
                 }
             }
-            if (value && Number(value) > 0) {
-                localStorage.setItem(prKey, String(value));
+            const oldVal = localStorage.getItem(prKey);
+            const numVal = Number(value);
+            if (value && numVal > 0) {
+                localStorage.setItem(prKey, String(numVal));
+                // Show per-exercise PR badge if increased
+                // Badge is always visible now; no need for timed show/hide
             } else {
                 localStorage.removeItem(prKey);
             }
+            // Re-render per-exercise ranks
+            try { renderPerExerciseRanks(parseInt(daySelect.value), getProgramForDay(parseInt(daySelect.value))); } catch (e) {}
         }
 
         // Spotify iptal edildi - fonksiyon kaldırıldı
@@ -1342,6 +1596,7 @@ const programs = {
                 });
             }
             updateProgress(dayIndex, programKey);
+            renderPerExerciseRanks(dayIndex, programKey);
         }
 
         function startCloudSyncAll() {
@@ -1430,48 +1685,96 @@ const programs = {
             programList.innerHTML = "";
             
             const todayData = programs[programKey];
-            // Isınma
             const warm = document.createElement('li');
             warm.className = 'warmup';
             warm.textContent = 'Isınma: 5 dk yürüyüş + mobilite';
             programList.appendChild(warm);
             todayData.forEach((item, index) => {
+                const setCount = parseSetCount(item.name);
                 const li = document.createElement("li");
                 li.className = "exercise-item";
                 
+                // Set checkbox'larını oluştur
+                let setCheckboxes = '';
+                for (let i = 1; i <= setCount; i++) {
+                    setCheckboxes += `
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <input type="checkbox" class="set-checkbox" id="set${index}_${i}" data-set="${i}">
+                            <div class="set-label">${i}</div>
+                        </div>
+                    `;
+                }
+                const prKey = getPRKey(programKey, item.name);
                 li.innerHTML = `
                     <div class="exercise-content">
-                        <input type="checkbox" class="exercise-checkbox" id="chk${index}">
                         <div class="exercise-details">
                             <div class="exercise-name">${item.name}</div>
                             <div class="exercise-rest">${item.rest}</div>
+                            <div class="level-badge" id="rankBadge${index}"></div>
+                            <div class="exercise-pr">
+                                <input type="number" class="pr-input" placeholder="PR (kg)" 
+                                       value="${localStorage.getItem(prKey) || ''}"
+                                       onchange="updatePR('${prKey}', this.value)">
+                                <span class="pr-label">Personal Record (kg)</span>
+                            </div>
+                            <div class="exercise-sets">
+                                ${setCheckboxes}
+                            </div>
                         </div>
                     </div>
                 `;
                 
         programList.appendChild(li);
                 
-                const chk = document.getElementById(`chk${index}`);
-                const saved = localStorage.getItem(`${dayIndex}_${programKey}_${index}`);
+                // Set checkbox'larını kontrol et ve event listener'ları ekle
+                for (let i = 1; i <= setCount; i++) {
+                    const setChk = document.getElementById(`set${index}_${i}`);
+                    const saved = localStorage.getItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`);
                 
                 if (saved === "true") {
-                    chk.checked = true;
-                    li.classList.add('completed');
-                }
-                
-                chk.addEventListener("change", () => {
-                    if (chk.checked) {
-                        li.classList.add("completed");
-                        localStorage.setItem(`${dayIndex}_${programKey}_${index}`, "true");
+                        setChk.checked = true;
+                    }
+                    
+                    // Set checkbox event listener
+                    setChk.addEventListener("change", () => {
+                        if (setChk.checked) {
+                            localStorage.setItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`, "true");
+                            if (useCloud && window.cloudSync && window.cloudSync.enabled) {
+                                const key = `${dayIndex}_${programKey}_${index}_set${i}`;
+                                window.cloudSync.setSet(currentUser, key, true);
+                            }
+                            // Dinlenme süresi varsa timer başlat
+                            const shortRest = parseRestTime(item.rest);
+                            let secondsToUse = shortRest;
+                            // Son set tamamlandı mı?
+                            let allDone = true;
+                            for (let s = 1; s <= setCount; s++) {
+                                const chkEl = document.getElementById(`set${index}_${s}`);
+                                if (!chkEl || !chkEl.checked) { allDone = false; break; }
+                            }
+                            if (allDone) {
+                                secondsToUse = getLongRestSeconds(shortRest);
+                            }
+                            if (secondsToUse > 0) {
+                                showTimerModal(secondsToUse);
+                            }
                     } else {
-                        li.classList.remove("completed");
-                        localStorage.setItem(`${dayIndex}_${programKey}_${index}`, "false");
+                            localStorage.setItem(`${currentUser}_${dayIndex}_${programKey}_${index}_set${i}`, "false");
+                            if (useCloud && window.cloudSync && window.cloudSync.enabled) {
+                                const key = `${dayIndex}_${programKey}_${index}_set${i}`;
+                                window.cloudSync.setSet(currentUser, key, false);
+                            }
                     }
                     updateProgress(dayIndex, programKey);
         });
+                }
+                
+                // Long press event listener'ı ekle
+                updateLongPressEvent(li, item);
     });
             
             updateProgress(dayIndex, programKey);
+            renderPerExerciseRanks(dayIndex, programKey);
 }
 
 // İlerleme bar
@@ -1595,6 +1898,126 @@ const programs = {
 
         function getPRKey(programKey, exerciseName) {
             return `${currentUser}_pr_${programKey}_${slugify(exerciseName)}`;
+        }
+
+        // PR Levels definition
+        const prLevels = [
+            { name: 'Rookie', thresholds: { bench: 40, squat: 60, deadlift: 80, ohp: 25, row: 40, lat: 40,
+                inclineDb: 15, frontSquat: 40, rdl: 60, legCurl: 30, hipThrust: 60, dbOHP: 12, latRaise: 6, facePull: 20, seatedRow: 40, plank: 30, sidePlank: 30, hkr: 0, wristCurl: 10, wristRoller: 5 } },
+            { name: 'Apprentice', thresholds: { bench: 60, squat: 80, deadlift: 100, ohp: 35, row: 60, lat: 60,
+                inclineDb: 20, frontSquat: 60, rdl: 80, legCurl: 40, hipThrust: 80, dbOHP: 16, latRaise: 8, facePull: 30, seatedRow: 60, plank: 60, sidePlank: 60, hkr: 0, wristCurl: 15, wristRoller: 7.5 } },
+            { name: 'Warrior', thresholds: { bench: 80, squat: 100, deadlift: 140, ohp: 45, row: 80, lat: 80,
+                inclineDb: 30, frontSquat: 80, rdl: 100, legCurl: 50, hipThrust: 120, dbOHP: 22, latRaise: 12, facePull: 40, seatedRow: 80, plank: 90, sidePlank: 90, hkr: 5, wristCurl: 20, wristRoller: 10 } },
+            { name: 'Protector', thresholds: { bench: 100, squat: 140, deadlift: 180, ohp: 55, row: 100, lat: 100,
+                inclineDb: 35, frontSquat: 100, rdl: 140, legCurl: 60, hipThrust: 160, dbOHP: 26, latRaise: 16, facePull: 50, seatedRow: 100, plank: 120, sidePlank: 120, hkr: 10, wristCurl: 25, wristRoller: 12.5 } },
+            { name: 'Knight', thresholds: { bench: 120, squat: 160, deadlift: 200, ohp: 65, row: 120, lat: 120,
+                inclineDb: 40, frontSquat: 120, rdl: 160, legCurl: 70, hipThrust: 180, dbOHP: 30, latRaise: 20, facePull: 60, seatedRow: 120, plank: 150, sidePlank: 150, hkr: 15, wristCurl: 30, wristRoller: 15 } },
+            { name: 'Dark Knight (Legend)', thresholds: { bench: 140, squat: 180, deadlift: 220, ohp: 75, row: 140, lat: 140,
+                inclineDb: 50, frontSquat: 140, rdl: 180, legCurl: 80, hipThrust: 200, dbOHP: 36, latRaise: 24, facePull: 70, seatedRow: 140, plank: 180, sidePlank: 180, hkr: 20, wristCurl: 40, wristRoller: 20 } },
+        ];
+
+        // Rank Turkish translations
+        const rankTrMap = {
+            'Rookie': 'Acemi',
+            'Apprentice': 'Çırak',
+            'Warrior': 'Savaşçı',
+            'Protector': 'Koruyucu',
+            'Knight': 'Şövalye',
+            'Dark Knight (Legend)': 'Kara Şövalye (Efsane)'
+        };
+
+        const prKeyMap = {
+            bench: ['bench-press', 'barbell-bench-press', 'bench'],
+            squat: ['back-squat', 'barbell-back-squat', 'front-squat', 'goblet-squat'],
+            deadlift: ['deadlift', 'romanian-deadlift'],
+            ohp: ['overhead-press', 'dumbbell-overhead-press'],
+            row: ['barbell-row', 'seated-cable-row'],
+            lat: ['lat-pulldown', 'pull-up']
+        };
+
+        function getNumericPRValue(text) {
+            const v = Number(text);
+            return isNaN(v) ? 0 : v;
+        }
+
+        // Determine group by exercise slug
+        function getGroupForExercise(nameSlug) {
+            if (/bench-press/.test(nameSlug)) return 'bench';
+            if (/(front-squat|goblet-squat)/.test(nameSlug)) return 'frontSquat';
+            if (/squat/.test(nameSlug)) return 'squat';
+            if (/(romanian-deadlift)/.test(nameSlug)) return 'rdl';
+            if (/deadlift/.test(nameSlug)) return 'deadlift';
+            if (/(incline-dumbbell-press)/.test(nameSlug)) return 'inclineDb';
+            if (/(dumbbell-overhead-press)/.test(nameSlug)) return 'dbOHP';
+            if (/overhead-press/.test(nameSlug)) return 'ohp';
+            if (/(seated-cable-row)/.test(nameSlug)) return 'seatedRow';
+            if (/row/.test(nameSlug)) return 'row';
+            if (/lat-pulldown|pull-up/.test(nameSlug)) return 'lat';
+            if (/(face-pull)/.test(nameSlug)) return 'facePull';
+            if (/(leg-curl)/.test(nameSlug)) return 'legCurl';
+            if (/(hip-thrust)/.test(nameSlug)) return 'hipThrust';
+            if (/(lateral-raise)/.test(nameSlug)) return 'latRaise';
+            if (/(knee-raise)/.test(nameSlug)) return 'hkr';
+            if (/(wrist-curl|reverse-wrist-curl)/.test(nameSlug)) return 'wristCurl';
+            if (/(wrist-roller)/.test(nameSlug)) return 'wristRoller';
+            if (/(plank|side-plank)/.test(nameSlug)) return 'plank';
+            return null;
+        }
+
+        function getLevelFor(group, value) {
+            let label = prLevels[0].name;
+            for (const level of prLevels) {
+                if (value >= level.thresholds[group]) label = level.name; else break;
+            }
+            return label;
+        }
+
+        function determineLevel(prs) {
+            let lvl = prLevels[0].name;
+            for (const level of prLevels) {
+                const t = level.thresholds;
+                const ok = prs.bench >= t.bench && prs.squat >= t.squat && prs.deadlift >= t.deadlift && prs.ohp >= t.ohp && prs.row >= t.row && prs.lat >= t.lat;
+                if (ok) lvl = level.name; else break;
+            }
+            return lvl;
+        }
+
+        function renderPerExerciseRanks(dayIndex, programKey) {
+            const todayData = programs[programKey];
+            todayData.forEach((item, index) => {
+                const nameSlug = slugify(item.name);
+                const group = getGroupForExercise(nameSlug);
+                if (!group) return;
+                const prKey = getPRKey(programKey, item.name);
+                const val = Number(localStorage.getItem(prKey) || '0');
+                const num = isNaN(val) ? 0 : val;
+                const label = getLevelFor(group, num);
+                const badge = document.getElementById('rankBadge' + index);
+                if (badge) {
+                    const tr = rankTrMap[label] ? ` (${rankTrMap[label]})` : '';
+                    badge.textContent = label + tr;
+                    // next-level delta
+                    let nextLabel = null; let nextTarget = null;
+                    for (const level of prLevels) {
+                        if (num < level.thresholds[group]) { nextLabel = level.name; nextTarget = level.thresholds[group]; break; }
+                    }
+                    let sub = document.getElementById('rankSub' + index);
+                    if (!sub) {
+                        const el = document.createElement('div');
+                        el.className = 'rank-sub';
+                        el.id = 'rankSub' + index;
+                        badge.insertAdjacentElement('afterend', el);
+                        sub = el;
+                    }
+                    if (nextLabel && nextTarget != null) {
+                        const remain = Math.max(0, nextTarget - num);
+                        const nextTr = rankTrMap[nextLabel] ? ` (${rankTrMap[nextLabel]})` : '';
+                        sub.textContent = `${nextLabel}${nextTr} için ${remain} kg kaldı`;
+                    } else {
+                        sub.textContent = '';
+                    }
+                }
+            });
         }
 
         function getLongRestSeconds(shortRestSeconds) {
@@ -1857,6 +2280,7 @@ const programs = {
                         <div class="exercise-details">
                             <div class="exercise-name">${item.name}</div>
                             <div class="exercise-rest">${item.rest}</div>
+                            <div class="level-badge" id="rankBadge${index}"></div>
                             <div class="exercise-pr">
                                 <input type="number" class="pr-input" placeholder="PR (kg)" 
                                        value="${localStorage.getItem(prKey) || ''}"
@@ -1920,6 +2344,7 @@ const programs = {
             });
             
             updateProgress(dayIndex, programKey);
+            renderPerExerciseRanks(dayIndex, programKey);
         }
 
 
@@ -1944,6 +2369,37 @@ showProgram(parseInt(daySelect.value));
         daySelect.addEventListener("change", () => {
             showProgram(parseInt(daySelect.value));
         });
+
+        // Program / Rehber toggle
+        const btnProgram = document.getElementById('btnProgram');
+        const btnGuide = document.getElementById('btnGuide');
+        const guideSection = document.getElementById('guideSection');
+        if (btnProgram && btnGuide && guideSection) {
+            btnProgram.addEventListener('click', () => {
+                btnProgram.classList.add('active');
+                btnGuide.classList.remove('active');
+                document.querySelector('.program-section').style.display = 'block';
+                guideSection.style.display = 'none';
+            });
+            btnGuide.addEventListener('click', () => {
+                btnGuide.classList.add('active');
+                btnProgram.classList.remove('active');
+                document.querySelector('.program-section').style.display = 'none';
+                guideSection.style.display = 'block';
+            });
+            // Guide search
+            const guideSearch = document.getElementById('guideSearch');
+            if (guideSearch) {
+                guideSearch.addEventListener('input', () => {
+                    const q = guideSearch.value.toLowerCase();
+                    const sections = document.querySelectorAll('#guideArticle section');
+                    sections.forEach(sec => {
+                        const text = sec.innerText.toLowerCase();
+                        sec.style.display = text.includes(q) ? 'block' : 'none';
+                    });
+                });
+            }
+        }
 
         // Alt kısımda 5 sn bekleyince sıfırlama butonunu göster
         let bottomHoldTimer = null;
